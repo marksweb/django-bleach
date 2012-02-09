@@ -1,7 +1,7 @@
-django-bleach - Bleach and sanitize user HTML
+django-bleach - Bleach and sanitise user HTML
 =============================================
 
-[`bleach`][bleach] is a Python module that takes any HTML input, and returns valid, sanitized HTML
+[`bleach`][bleach] is a Python module that takes any HTML input, and returns valid, sanitised HTML
 that contains only an allowed subset of HTML tags, attributes and styles. `django-bleach` is a
 Django app that makes using `bleach` extremely easy.
 
@@ -64,7 +64,7 @@ field:
 
 		# ...
 
-`BleachField` takes the following arguments, to customize the output of `bleach`. See the 
+`BleachField` takes the following arguments, to customise the output of `bleach`. See the 
 [`bleach` documentation][bleach-docs-params] for their use:
 
 * `allowed_tags`
@@ -78,14 +78,14 @@ normal field attributes. Behind the scenes, it is a TextField, and accepts all t
 the default TextFields do.
 
 The `BleachField` model field makes use of the `BleachField` form field to do all of the work. It
-provides no sanitization facilities itself. This is considered a bug, but a clean solution has not
+provides no sanitisation facilities itself. This is considered a bug, but a clean solution has not
 yet been implemented. Any pull requests fixing this will be gratefully applied. As long as the
 `BleachField` model field is only used with `BleachField` form fields, there will be no problem. If
-this is not the case, sanitized HTML can not be guaranteed.
+this is not the case, sanitised HTML can not be guaranteed.
 
 ### In your forms
 
-A `BleachField` form field is provided. This field sanitizes HTML input from the user, and presents
+A `BleachField` form field is provided. This field sanitises HTML input from the user, and presents
 safe, clean HTML to your Django application. This is where most of the work is done.
 
 
