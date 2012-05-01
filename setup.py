@@ -15,6 +15,7 @@ setup(
     author_email='heap.tim@gmail.com',
     url='https://bitbucket.org/ionata/django-bleach',
     packages=['django_bleach',],
+    install_requires = ['bleach'],
     package_data={},
     classifiers=[
         'Environment :: Web Environment',
