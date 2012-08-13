@@ -33,3 +33,6 @@ class BleachField(models.TextField):
         options.update(self.formfield_defaults)
         options.update(kwargs)
         return super(BleachField, self).formfield(**options)
+
+    def south_field_triple(self):
+        return ('django_bleach.forms.BleachField', [], self.formfield_defaults)
