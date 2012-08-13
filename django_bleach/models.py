@@ -1,14 +1,16 @@
 from django.db import models
 
 from django_bleach import forms
-
 from django_bleach.utils import get_bleach_default_options
-
 from django_bleach.forms import default_widget
+
 
 class BleachField(models.TextField):
 
-    def __init__(self, allowed_tags=None, allowed_styles=None, allowed_attributes=None, strip_tags=None, strip_comments=None, *args, **kwargs):
+    def __init__(self, allowed_tags=None, allowed_styles=None,
+        allowed_attributes=None, strip_tags=None, strip_comments=None,
+        *args, **kwargs):
+
         super(BleachField, self).__init__(*args, **kwargs)
 
         self.formfield_defaults = {}
@@ -23,7 +25,6 @@ class BleachField(models.TextField):
             self.formfield_defaults['strip_tags'] = strip_tags
         if strip_comments is not None:
             self.formfield_defaults['strip_comments'] = strip_comments
-
 
     def formfield(self, **kwargs):
         options = {

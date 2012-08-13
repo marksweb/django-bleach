@@ -1,5 +1,6 @@
 from django.conf import settings
 
+
 def get_bleach_default_options():
     bleach_args = {}
 

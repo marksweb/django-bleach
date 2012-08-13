@@ -8,20 +8,21 @@ from django.utils.importlib import import_module
 
 from django_bleach.utils import get_bleach_default_options
 
+
 def load_widget(path):
     i = path.rfind('.')
-    module, attr = path[:i], path[i+1:]
+    module, attr = path[:i], path[i + 1:]
     try:
         mod = import_module(module)
-    except ImportError, e:
-        raise ImproperlyConfigured('Error importing widget for BleachField %s: "%s"' % (path, e))
-    except ValueError, e:
-        raise ImproperlyConfigured('Error importing widget for BleachField %s: "%s"' % (path, e))
+    except (ImportError, ValueError) as e:
+        error_message = 'Error importing widget for BleachField %s: "%s"'
+        raise ImproperlyConfigured(error_message % (path, e))
 
     try:
         cls = getattr(mod, attr)
     except AttributeError:
-        raise ImproperlyConfigured('Module "%s" does not define a "%s" widget' % (module, attr))
+        raise ImproperlyConfigured('Module "%s" does not define a "%s" widget'
+            % (module, attr))
 
     return cls
 
@@ -29,10 +30,14 @@ default_widget = forms.Textarea
 if hasattr(settings, 'BLEACH_DEFAULT_WIDGET'):
     default_widget = load_widget(settings.BLEACH_DEFAULT_WIDGET)
 
+
 class BleachField(forms.CharField):
     widget = default_widget
 
-    def __init__(self, allowed_tags=None, allowed_attributes=None, allowed_styles=None, strip_comments=None, strip_tags=None, *args, **kwargs):
+    def __init__(self, allowed_tags=None, allowed_attributes=None,
+        allowed_styles=None, strip_comments=None, strip_tags=None,
+        *args, **kwargs):
+
         self.widget = default_widget
 
         super(BleachField, self).__init__(*args, **kwargs)
@@ -49,8 +54,6 @@ class BleachField(forms.CharField):
             self.bleach_options['strip'] = strip_tags
         if strip_comments is not None:
             self.bleach_options['strip_comments'] = strip_comments
-
-
 
     def to_python(self, value):
         """
