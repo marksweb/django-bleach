@@ -1,8 +1,13 @@
+Version 0.1.2
+=============
+
+* Fix south migration bug
+
 Version 0.1.1
 =============
 
-* Add south_triple_field for South integration
-* Clean up files to meet pep8 compliance
+* add south_triple_field for south integration
+* clean up files to meet pep8 compliance
 
 Version 0.1.0
 =============
