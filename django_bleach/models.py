@@ -36,4 +36,5 @@ class BleachField(models.TextField):
         return super(BleachField, self).formfield(**options)
 
     def south_field_triple(self):
-        return ('django_bleach.forms.BleachField', [], self.formfield_defaults)
+        return ('django_bleach.models.BleachField', [],
+            self.formfield_defaults)
