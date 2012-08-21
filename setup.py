@@ -14,7 +14,7 @@ setup(
     author='Tim Heap',
     author_email='heap.tim@gmail.com',
     url='https://bitbucket.org/ionata/django-bleach',
-    packages=['django_bleach'],
+    packages=find_packages(),
     install_requires=['bleach'],
     package_data={},
     classifiers=[
