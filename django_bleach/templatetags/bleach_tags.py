@@ -1,28 +1,29 @@
 import bleach
 
 from django import template
+from django.conf import settings
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
 
 bleach_args = {}
 
-if "BLEACH_ALLOWED_TAGS" in settings:
-    bleach_args["tags"] = settings.BLEACH_ALLOWED_TAGS
+possible_settings = {
+    'BLEACH_ALLOWED_TAGS': 'tags',
+    'BLEACH_ALLOWED_ATTRIBUTES': 'attributes',
+    'BLEACH_ALLOWED_STYLES': 'styles',
+    'BLEACH_STRIP_TAGS': 'strip',
+    'BLEACH_STRIP_COMMENTS': 'strip_comments',
+}
 
-if "BLEACH_ALLOWED_ATTRIBUTES" in settings:
-    bleach_args["attributes"] = settings.BLEACH_ALLOWED_ATTRIBUTES
-
-if "BLEACH_ALLOWED_STYLES" in settings:
-    bleach_args["styles"] = settings.BLEACH_ALLOWED_STYLES
-
-if "BLEACH_STRIP_TAGS" in settings:
-    bleach_args["strip"] = settings.BLEACH_STRIP_TAGS
-
-if "BLEACH_STRIP_COMMENTS" in settings:
-    bleach_args["strip_comments"] = settings.BLEACH_STRIP_COMMENTS
+for setting, kwarg in possible_settings.iteritems():
+    if hasattr(settings, setting):
+        bleach_args[kwarg] = getattr(settings, setting)
 
 
 def bleach_value(value):
-    return bleach.clean(value, **kwargs=bleach_args)
+    bleached_value = bleach.clean(value, **bleach_args)
+    return mark_safe(bleached_value)
+
 register.filter('bleach', bleach_value)
