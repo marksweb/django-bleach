@@ -1,7 +1,6 @@
 from django.db import models
 
 from django_bleach import forms
-from django_bleach.utils import get_bleach_default_options
 from django_bleach.forms import default_widget
 from django.conf import settings
 
