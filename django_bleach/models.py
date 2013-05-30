@@ -1,8 +1,8 @@
 from django.db import models
 
 from django_bleach import forms
-from django_bleach.utils import get_bleach_default_options
 from django_bleach.forms import default_widget
+from django.conf import settings
 
 
 class BleachField(models.TextField):
@@ -35,6 +35,9 @@ class BleachField(models.TextField):
         options.update(kwargs)
         return super(BleachField, self).formfield(**options)
 
-    def south_field_triple(self):
-        return ('django_bleach.models.BleachField', [],
-            self.formfield_defaults)
+
+if 'south' in settings.INSTALLED_APPS:
+    from south.modelsinspector import add_introspection_rules
+    # Bleach attributes don't influence on data representation so we use
+    # default introspection rules of TextField
+    add_introspection_rules([], ['^django_bleach\.models\.BleachField'])
