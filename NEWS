@@ -1,3 +1,8 @@
+Version 0.2.0
+=============
+
+* Add `bleach_linkify` template filter from whitehat2k13
+
 Version 0.1.3
 =============
 
