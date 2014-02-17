@@ -27,3 +27,7 @@ def bleach_value(value):
     return mark_safe(bleached_value)
 
 register.filter('bleach', bleach_value)
+
+@register.filter
+def bleach_linkify(value):
+    return bleach.linkify(value, parse_email=True)
