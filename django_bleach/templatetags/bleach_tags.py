@@ -17,7 +17,7 @@ possible_settings = {
     'BLEACH_STRIP_COMMENTS': 'strip_comments',
 }
 
-for setting, kwarg in possible_settings.iteritems():
+for setting, kwarg in possible_settings.items():
     if hasattr(settings, setting):
         bleach_args[kwarg] = getattr(settings, setting)
 
