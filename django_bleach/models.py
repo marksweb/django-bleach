@@ -1,39 +1,36 @@
+from django.conf import settings
 from django.db import models
 
-from django_bleach import forms
-from django_bleach.forms import default_widget
-from django.conf import settings
+from bleach import clean
+
+from .utils import get_bleach_default_options
 
 
 class BleachField(models.TextField):
-
-    def __init__(self, allowed_tags=None, allowed_styles=None,
-        allowed_attributes=None, strip_tags=None, strip_comments=None,
-        *args, **kwargs):
+    def __init__(self, allowed_tags=None, allowed_attributes=None,
+                 allowed_styles=None, strip_tags=None, strip_comments=None,
+                 *args, **kwargs):
 
         super(BleachField, self).__init__(*args, **kwargs)
 
-        self.formfield_defaults = {}
+        self.bleach_kwargs = get_bleach_default_options()
 
-        if allowed_tags is not None:
-            self.formfield_defaults['allowed_tags'] = allowed_tags
-        if allowed_attributes is not None:
-            self.formfield_defaults['allowed_attributes'] = allowed_attributes
-        if allowed_styles is not None:
-            self.formfield_defaults['allowed_styles'] = allowed_styles
-        if strip_tags is not None:
-            self.formfield_defaults['strip_tags'] = strip_tags
-        if strip_comments is not None:
-            self.formfield_defaults['strip_comments'] = strip_comments
+        if allowed_tags:
+            self.bleach_kwargs['tags'] = allowed_tags
+        if allowed_attributes:
+            self.bleach_kwargs['attributes'] = allowed_attributes
+        if allowed_styles:
+            self.bleach_kwargs['styles'] = allowed_styles
+        if strip_tags:
+            self.bleach_kwargs['strip'] = strip_tags
+        if strip_comments:
+            self.bleach_kwargs['strip_comments'] = strip_comments
 
-    def formfield(self, **kwargs):
-        options = {
-            'form_class': forms.BleachField,
-            'widget': default_widget,
-        }
-        options.update(self.formfield_defaults)
-        options.update(kwargs)
-        return super(BleachField, self).formfield(**options)
+    def pre_save(self, model_instance, add):
+        return clean(
+            getattr(model_instance, self.attname),
+            **self.bleach_kwargs
+        )
 
 
 if 'south' in settings.INSTALLED_APPS:
