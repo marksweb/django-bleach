@@ -9,10 +9,10 @@ except ImportError:
 
 setup(
     name='django-bleach',
-    version="0.2.0",
+    version="0.2.1",
     description='Easily use bleach with Django models and templates',
     author='Tim Heap',
-    author_email='heap.tim@gmail.com',
+    author_email='tim@timheap.me',
     url='https://bitbucket.org/ionata/django-bleach',
     packages=find_packages(),
     install_requires=[
