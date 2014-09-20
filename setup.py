@@ -13,7 +13,7 @@ setup(
     description='Easily use bleach with Django models and templates',
     author='Tim Heap',
     author_email='tim@timheap.me',
-    url='https://bitbucket.org/ionata/django-bleach',
+    url='https://bitbucket.org/tim_heap/django-bleach',
     packages=find_packages(),
     install_requires=[
         'bleach',
