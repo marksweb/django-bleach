@@ -34,16 +34,13 @@ See the bleach documentation for their use:
 * ``strip_tags``
 * ``strip_comments``
 
-In addition to the bleach-specific arguments, the BleachField model field
+In addition to the bleach-specific arguments, the ``BleachField`` model field
 accepts all of the normal field attributes. Behind the scenes, it is a
-TextField, and accepts all the same arguments as the default TextFields do.
+``TextField``, and accepts all the same arguments as the default ``TextField``\s do.
 
-The BleachField model field makes use of the BleachField form field to do all
-of the work. It provides no sanitisation facilities itself. This is considered
-a bug, but a clean solution has not yet been implemented. Any pull requests
-fixing this will be gratefully applied. As long as the BleachField model field
-is only used with BleachField form fields, there will be no problem. If this is
-not the case, sanitised HTML can not be guaranteed.
+The field does not specify any formfield to use, and falls back on the default
+``CharField`` and ``Textarea`` used by ``TextFields``. You must override the
+form field or widget yourself if you need something different.
 
 .. _forms:
 
