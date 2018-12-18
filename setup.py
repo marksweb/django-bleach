@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-bleach',
-    version="0.3.0",
+    version="0.4.0",
     description='Easily use bleach with Django models and templates',
     author='Mark Walker',
     author_email='theshow@gmail.com',

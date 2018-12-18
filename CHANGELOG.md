@@ -1,3 +1,10 @@
+Version 0.4.0
+=============
+
+* Added support for django>=1.9
+* Ensure that the `model_instance` field gets updated with the clean value
+
+
 Version 0.3.0
 =============
 
