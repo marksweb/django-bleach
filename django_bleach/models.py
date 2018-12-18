@@ -27,10 +27,12 @@ class BleachField(models.TextField):
             self.bleach_kwargs['strip_comments'] = strip_comments
 
     def pre_save(self, model_instance, add):
-        return clean(
+        clean_value = clean(
             getattr(model_instance, self.attname),
             **self.bleach_kwargs
         )
+        setattr(model_instance, self.attname, clean_value)
+        return clean_value
 
 
 if 'south' in settings.INSTALLED_APPS:
