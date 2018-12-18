@@ -4,7 +4,7 @@ from django import forms
 from django.core.exceptions import ImproperlyConfigured
 
 from django.conf import settings
-from django.utils.importlib import import_module
+from importlib import import_module
 
 from django_bleach.utils import get_bleach_default_options
 
