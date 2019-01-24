@@ -14,7 +14,7 @@ setup(
     long_description=long_description,
     author='Mark Walker',
     author_email='theshow@gmail.com',
-    url='https://bitbucket.org/marksweb/django-bleach',
+    url='https://github.com/marksweb/django-bleach',
     packages=find_packages(),
     install_requires=[
         'bleach',
