@@ -117,7 +117,7 @@ where most of the work is done.
 In your templates
 *****************
 
-If you have a peice of content from somewhere that needs to be printed in a
+If you have a piece of content from somewhere that needs to be printed in a
 template, you can use the ``bleach`` filter::
 
     {% load bleach_tags %}
@@ -130,8 +130,18 @@ as a parameter to the filter::
 
     {{ some_unsafe_content|bleach:"p,span" }}
 
+There is also ``bleach_linkify`` which uses the linkify_ function of bleach
+which converts URL-like strings in an HTML fragment to links
+
+This function converts strings that look like URLs, domain names and email
+addresses in text that may be an HTML fragment to links, while preserving:
+
+1. links already in the string
+2. urls found in attributes
+3. email addresses
 
 
 .. _bleach: https://github.com/jsocol/bleach "Bleach"
 .. _bleach documentation: https://github.com/jsocol/bleach/blob/master/README.rst "Bleach documentation - parameters"
 .. _django-ckeditor: https://github.com/shaunsephton/django-ckeditor "Django CKEditor widget"
+.. _linkify: https://bleach.readthedocs.io/en/latest/linkify.html?highlight=linkify#bleach.linkify "linkify"

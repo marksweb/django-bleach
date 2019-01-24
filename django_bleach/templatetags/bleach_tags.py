@@ -22,6 +22,7 @@ for setting, kwarg in possible_settings.items():
         bleach_args[kwarg] = getattr(settings, setting)
 
 
+@register.filter(name='bleach')
 def bleach_value(value, tags=None):
     if tags is not None:
         args = bleach_args.copy()
@@ -31,9 +32,17 @@ def bleach_value(value, tags=None):
     bleached_value = bleach.clean(value, **args)
     return mark_safe(bleached_value)
 
-register.filter('bleach', bleach_value)
-
 
 @register.filter
 def bleach_linkify(value):
+    """
+    Convert URL-like strings in an HTML fragment to links
+
+    This function converts strings that look like URLs, domain names and email
+    addresses in text that may be an HTML fragment to links, while preserving:
+
+        1. links already in the string
+        2. urls found in attributes
+        3. email addresses
+    """
     return bleach.linkify(value, parse_email=True)

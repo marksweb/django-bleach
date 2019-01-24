@@ -1,3 +1,9 @@
+Version 0.4.1
+=============
+
+* Option to pass *allowed tags* to the `bleach` template filter added by Rafał Selewońko.
+* Moved project to Github.
+
 Version 0.4.0
 =============
 

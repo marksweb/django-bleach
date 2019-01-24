@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-bleach',
-    version="0.4.0",
+    version="0.4.1",
     description='Easily use bleach with Django models and templates',
     long_description=long_description,
     author='Mark Walker',
