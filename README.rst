@@ -112,9 +112,11 @@ template, you can use the ``bleach`` filter::
 
     {{ some_unsafe_content|bleach }}
 
-The filter takes no arguments. It uses the default settings defined in your
-application settings.
+If filter has no arguments it uses default settings defined in your
+application settings. You can override allowed tags by specifying them
+as a parameter to the filter::
 
+    {{ some_unsafe_content|bleach:"p,span" }}
 
 
 
