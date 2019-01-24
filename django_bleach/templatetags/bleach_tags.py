@@ -22,11 +22,17 @@ for setting, kwarg in possible_settings.items():
         bleach_args[kwarg] = getattr(settings, setting)
 
 
-def bleach_value(value):
-    bleached_value = bleach.clean(value, **bleach_args)
+def bleach_value(value, tags=None):
+    if tags is not None:
+        args = bleach_args.copy()
+        args['tags'] = tags.split(',')
+    else:
+        args = bleach_args
+    bleached_value = bleach.clean(value, **args)
     return mark_safe(bleached_value)
 
 register.filter('bleach', bleach_value)
+
 
 @register.filter
 def bleach_linkify(value):
