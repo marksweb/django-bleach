@@ -1,6 +1,18 @@
 django-bleach - Bleach and sanitise user HTML
 =============================================
 
+.. image:: http://img.shields.io/pypi/v/django-bleach.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-bleach/
+    :alt: Latest Version
+
+.. image:: http://img.shields.io/pypi/dm/django-bleach.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-bleach/
+    :alt: Downloads
+
+.. image:: http://img.shields.io/pypi/l/django-bleach.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-bleach/
+    :alt: License
+
 Bleach_ is a Python module that takes any HTML input, and returns
 valid, sanitised HTML that contains only an allowed subset of HTML tags,
 attributes and styles. ``django-bleach`` is a Django app that makes using
