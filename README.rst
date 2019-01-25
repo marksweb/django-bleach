@@ -1,6 +1,10 @@
 django-bleach - Bleach and sanitise user HTML
 =============================================
 
+.. image:: https://api.codacy.com/project/badge/Grade/c34f923ab0a84a6f96728866c749d511
+   :alt: Codacy Badge
+   :target: https://app.codacy.com/app/marksweb/django-bleach?utm_source=github.com&utm_medium=referral&utm_content=marksweb/django-bleach&utm_campaign=Badge_Grade_Dashboard
+
 .. image:: http://img.shields.io/pypi/v/django-bleach.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: Latest Version
