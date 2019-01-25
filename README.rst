@@ -5,6 +5,9 @@ django-bleach - Bleach and sanitise user HTML
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: Latest Version
 
+.. image:: https://travis-ci.org/marksweb/django-bleach.svg?branch=master
+   :target: https://travis-ci.org/marksweb/django-bleach
+
 .. image:: http://img.shields.io/pypi/dm/django-bleach.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: Downloads
