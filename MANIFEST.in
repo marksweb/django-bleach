@@ -1,0 +1,17 @@
+include MANIFEST.in
+include LICENSE
+include README.rst
+include CHANGELOG.md
+include tox.ini
+include .pep8
+recursive-include testproject/templates *
+recursive-include testproject *
+recursive-include docs *
+exclude testproject/django-bleach.db
+prune .tox
+prune docs/_build
+prune testproject/htmlcov
+global-exclude *pyc
+global-exclude coverage.xml
+global-exclude .DS_Store
+global-exclude .coverage

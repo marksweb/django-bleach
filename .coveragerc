@@ -1,0 +1,11 @@
+[run]
+branch = True
+source =
+    django_bleach
+omit =
+    ../django_bleach/*tests*
+    ../tox/*
+[report]
+    precision = 1
+[html]
+    directory = ../htmlcov

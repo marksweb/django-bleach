@@ -1,0 +1,38 @@
+language: python
+
+sudo: false
+
+matrix:
+  include:
+    - python: "3.6"
+      env: TOX_ENV=flake8
+    - python: "3.6"
+      env: TOX_ENV=coverage
+    - python: "3.6"
+      env: TOX_ENV=py36-django18
+    - python: "3.6"
+      env: TOX_ENV=py36-django19
+    - python: "3.6"
+      env: TOX_ENV=py36-django110
+    - python: "3.6"
+      env: TOX_ENV=py36-django111
+    - python: "3.6"
+      env: TOX_ENV=py36-django20
+    - python: "3.6"
+      env: TOX_ENV=py36-django21
+    - python: "3.6"
+      env: TOX_ENV=py36-django22
+    - python: "2.7"
+      env: TOX_ENV=py27-django18
+    - python: "2.7"
+      env: TOX_ENV=py27-django19
+    - python: "2.7"
+      env: TOX_ENV=py27-django110
+    - python: "2.7"
+      env: TOX_ENV=py27-django111
+
+install:
+  - pip install tox
+
+script:
+  - tox -e $TOX_ENV
