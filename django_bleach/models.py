@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.db import models
 
 from bleach import clean
@@ -33,10 +32,3 @@ class BleachField(models.TextField):
         )
         setattr(model_instance, self.attname, clean_value)
         return clean_value
-
-
-if 'south' in settings.INSTALLED_APPS:
-    from south.modelsinspector import add_introspection_rules
-    # Bleach attributes don't influence on data representation so we use
-    # default introspection rules of TextField
-    add_introspection_rules([], ['^django_bleach\.models\.BleachField'])

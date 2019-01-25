@@ -21,10 +21,12 @@ def load_widget(path):
     try:
         cls = getattr(mod, attr)
     except AttributeError:
-        raise ImproperlyConfigured('Module "%s" does not define a "%s" widget'
-            % (module, attr))
+        raise ImproperlyConfigured(
+            'Module "%s" does not define a "%s" widget' % (module, attr)
+        )
 
     return cls
+
 
 default_widget = forms.Textarea
 if hasattr(settings, 'BLEACH_DEFAULT_WIDGET'):
@@ -35,8 +37,8 @@ class BleachField(forms.CharField):
     widget = default_widget
 
     def __init__(self, allowed_tags=None, allowed_attributes=None,
-        allowed_styles=None, strip_comments=None, strip_tags=None,
-        *args, **kwargs):
+                 allowed_styles=None, strip_comments=None, strip_tags=None,
+                 *args, **kwargs):
 
         self.widget = default_widget
 

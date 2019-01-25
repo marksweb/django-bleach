@@ -1,0 +1,12 @@
+<body>
+    <form action="." method="post">
+        {% csrf_token %}
+
+        {{ form.errors }}
+        {{ form.as_p }}
+
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+</body>

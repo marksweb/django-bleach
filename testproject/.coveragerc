@@ -1,0 +1,8 @@
+[run]
+branch = True
+source =
+    django_bleach
+omit =
+    ../*tests*
+[report]
+precision = 2
