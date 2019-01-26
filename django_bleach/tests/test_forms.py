@@ -1,22 +1,36 @@
 from django.test import TestCase
+from django.test.utils import override_settings
 
 from testproject.forms import BleachForm
 
 
 class TestBleachField(TestCase):
 
+    def test_empty(self):
+        """ Test no data """
+        with self.assertRaises(TypeError):
+            form = BleachForm(data={})
+            form.is_valid()
+
     def test_bleaching(self):
         """ Test values are bleached """
         test_data = {
             'no_tags': "<h1>Heading</h1>",
-            'bleach_strip': """<script>alert("Hello World")</script>""",
+            'no_strip': "<h1>Heading</h1>",
+            'bleach_strip': "<!-- script here -->"
+                            "<script>alert(\"Hello World\")</script>",
             'bleach_attrs': "<a href=\"https://www.google.com\" "
-                            "target=\"_blank\">google.com</a>"
+                            "target=\"_blank\">google.com</a>",
+            'bleach_styles': "<li style=\"color: white\">item</li>"
         }
         form = BleachForm(data=test_data)
         form.is_valid()
         self.assertEqual(
             form.cleaned_data['no_tags'], 'Heading'
+        )
+        self.assertEqual(
+            form.cleaned_data['no_strip'],
+            '&lt;h1&gt;Heading&lt;/h1&gt;'
         )
         self.assertEqual(
             form.cleaned_data['bleach_strip'],
@@ -26,18 +40,25 @@ class TestBleachField(TestCase):
             form.cleaned_data['bleach_attrs'],
             '<a href="https://www.google.com">google.com</a>'
         )
+        self.assertNotEqual(
+            form.cleaned_data['bleach_styles'],
+            test_data['bleach_styles']
+        )
 
     def test_tags(self):
         """ Test allowed tags are rendered"""
         test_data = {
-            'no_tags': "No tags here",
+            'no_tags': "<p>No tags here</p>",
+            'no_strip': "No tags here",
             'bleach_strip': "<ul><li>one</li><li>two</li></ul>",
             'bleach_attrs': "<a href=\"https://www.google.com\" "
-                            "title=\"Google\">google.com</a>"
+                            "title=\"Google\">google.com</a>",
+            'bleach_styles': "<li style=\"color: white;\">item</li>"
         }
         form = BleachForm(data=test_data)
         form.is_valid()
-        self.assertEqual(form.cleaned_data['no_tags'], 'No tags here')
+        self.assertEqual(form.cleaned_data['no_tags'], "No tags here")
+        self.assertEqual(form.cleaned_data['no_strip'], "No tags here")
 
         self.assertEqual(
             form.cleaned_data['bleach_strip'],
@@ -47,6 +68,10 @@ class TestBleachField(TestCase):
             form.cleaned_data['bleach_attrs'],
             test_data['bleach_attrs']
         )
+        self.assertEqual(
+            form.cleaned_data['bleach_styles'],
+            test_data['bleach_styles']
+        )
 
     def test_attrs(self):
         """ Test allowed attributes are rendered """
@@ -55,9 +80,11 @@ class TestBleachField(TestCase):
                     "<li>two</li>" \
                     "</ul>"
         test_data = {
+            'no_strip': "",
             'no_tags': list_html,
             'bleach_strip': list_html,
             'bleach_attrs': list_html,
+            'bleach_styles': list_html
         }
         form = BleachForm(data=test_data)
         form.is_valid()
@@ -70,4 +97,37 @@ class TestBleachField(TestCase):
         self.assertEqual(
             form.cleaned_data['bleach_attrs'],
             test_data['bleach_strip']
+        )
+        self.assertEqual(
+            form.cleaned_data['bleach_styles'],
+            '<ul><li>one</li><li>two</li></ul>'
+        )
+
+    @override_settings(
+        BLEACH_DEFAULT_WIDGET='testproject.forms.CustomTextWidget')
+    def test_widget_override(self):
+        test_data = {
+            'no_tags': "<p>No tags here</p>",
+            'no_strip': "No tags here",
+            'bleach_strip': "<ul><li>one</li><li>two</li></ul>",
+            'bleach_attrs': "<a href=\"https://www.google.com\" "
+                            "title=\"Google\">google.com</a>",
+            'bleach_styles': "<li style=\"color: white;\">item</li>"
+        }
+        form = BleachForm(data=test_data)
+        form.is_valid()
+        self.assertEqual(form.cleaned_data['no_tags'], "No tags here")
+        self.assertEqual(form.cleaned_data['no_strip'], "No tags here")
+
+        self.assertEqual(
+            form.cleaned_data['bleach_strip'],
+            test_data['bleach_strip']
+        )
+        self.assertEqual(
+            form.cleaned_data['bleach_attrs'],
+            test_data['bleach_attrs']
+        )
+        self.assertEqual(
+            form.cleaned_data['bleach_styles'],
+            test_data['bleach_styles']
         )
