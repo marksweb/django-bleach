@@ -9,5 +9,3 @@ omit =
     precision = 1
 [html]
     directory = ../htmlcov
-[xml]
-    output = ../coverage.xml
