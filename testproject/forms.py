@@ -6,10 +6,6 @@ from testproject.constants import (
 )
 
 
-class CustomTextWidget(forms.Textarea):
-    pass
-
-
 class BleachForm(forms.Form):
     """ Form for testing BleachField """
     no_tags = BleachField(
@@ -20,7 +16,6 @@ class BleachForm(forms.Form):
 
     no_strip = BleachField(
         max_length=100,
-        strip_tags=False,
         allowed_tags=None,
         allowed_attributes=None
     )
