@@ -1,5 +1,9 @@
 language: python
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=55a1b8d1c581d2c728cc33a81be686cb72e571d9381dec36272ccd0408036c7a
+
 sudo: false
 
 matrix:
