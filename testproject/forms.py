@@ -2,7 +2,10 @@ from django import forms
 
 from django_bleach.forms import BleachField
 from testproject.constants import (
-    ALLOWED_ATTRIBUTES, ALLOWED_TAGS
+    ALLOWED_ATTRIBUTES,
+    ALLOWED_PROTOCOLS,
+    ALLOWED_STYLES,
+    ALLOWED_TAGS
 )
 
 
@@ -34,6 +37,7 @@ class BleachForm(forms.Form):
         max_length=100,
         strip_tags=False,
         allowed_tags=ALLOWED_TAGS,
+        allowed_protocols=ALLOWED_PROTOCOLS,
         allowed_attributes=ALLOWED_ATTRIBUTES
     )
     bleach_styles = BleachField(
@@ -41,5 +45,5 @@ class BleachForm(forms.Form):
         strip_tags=False,
         allowed_attributes=['style'],
         allowed_tags=ALLOWED_TAGS,
-        allowed_styles=['color']
+        allowed_styles=ALLOWED_STYLES
     )

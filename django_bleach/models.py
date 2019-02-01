@@ -7,8 +7,8 @@ from .utils import get_bleach_default_options
 
 class BleachField(models.TextField):
     def __init__(self, allowed_tags=None, allowed_attributes=None,
-                 allowed_styles=None, strip_tags=None, strip_comments=None,
-                 *args, **kwargs):
+                 allowed_styles=None, allowed_protocols=None,
+                 strip_tags=None, strip_comments=None, *args, **kwargs):
 
         super(BleachField, self).__init__(*args, **kwargs)
 
@@ -20,6 +20,8 @@ class BleachField(models.TextField):
             self.bleach_kwargs['attributes'] = allowed_attributes
         if allowed_styles:
             self.bleach_kwargs['styles'] = allowed_styles
+        if allowed_protocols:
+            self.bleach_kwargs['protocols'] = allowed_protocols
         if strip_tags:
             self.bleach_kwargs['strip'] = strip_tags
         if strip_comments:

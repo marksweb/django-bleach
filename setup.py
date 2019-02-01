@@ -70,11 +70,11 @@ setup(
     license='MIT',
     packages=find_packages(exclude=('test_project*',)),
     install_requires=[
-        'bleach',
+        'bleach>=1.5.0',
         'Django>=1.8',
     ],
     tests_require=[
-        'bleach',
+        'bleach>=1.5.0',
         'tox'
     ],
     cmdclass={'test': Tox},
