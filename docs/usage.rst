@@ -31,6 +31,7 @@ See the bleach documentation for their use:
 * ``allowed_tags``
 * ``allowed_attributes``
 * ``allowed_styles``
+* ``allowed_protocols``
 * ``strip_tags``
 * ``strip_comments``
 

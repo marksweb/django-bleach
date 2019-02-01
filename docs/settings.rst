@@ -24,6 +24,11 @@ completely optional::
     BLEACH_ALLOWED_STYLES = [
         'font-family', 'font-weight', 'text-decoration', 'font-variant']
 
+    # Which protocols (and pseudo-protocols) are allowed in 'src' attributes
+    # (assuming src is an allowed attribute)
+    BLEACH_ALLOWED_PROTOCOLS = [
+        'http', 'https', 'data']
+
     # Strip unknown tags if True, replace with HTML escaped characters if False
     BLEACH_STRIP_TAGS = True
 
@@ -37,6 +42,7 @@ override as a named parameter to the ``BleachField``::
 * ``allowed_tags``
 * ``allowed_attributes``
 * ``allowed_styles``
+* ``allowed_protocols``
 * ``strip_tags``
 * ``strip_comments``
 
