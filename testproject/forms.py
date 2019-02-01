@@ -6,6 +6,10 @@ from testproject.constants import (
 )
 
 
+class CustomBleachWidget(forms.Textarea):
+    pass
+
+
 class BleachForm(forms.Form):
     """ Form for testing BleachField """
     no_tags = BleachField(

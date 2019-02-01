@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
 
-    'ckeditor',
     'django_bleach',
     'testproject'
 ]
@@ -76,5 +75,3 @@ if django.VERSION >= (2, 2):
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware'
     )
-
-BLEACH_DEFAULT_WIDGET = 'ckeditor.widgets.CKEditorWidget'
