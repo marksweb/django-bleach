@@ -15,6 +15,12 @@ ALLOWED_ATTRIBUTES = {
     'ul': ['class']
 }
 
+ALLOWED_PROTOCOLS = [
+    'http',
+    'https',
+    'data',
+]
+
 
 class BleachForm(forms.Form):
     """ Form for testing BleachField """
@@ -34,4 +40,11 @@ class BleachForm(forms.Form):
         strip_tags=False,
         allowed_tags=ALLOWED_TAGS,
         allowed_attributes=ALLOWED_ATTRIBUTES
+    )
+    bleach_attrs = BleachField(
+        max_length=100,
+        strip_tags=False,
+        allowed_tags=ALLOWED_TAGS,
+        allowed_attributes=ALLOWED_ATTRIBUTES,
+        allowed_protocols=ALLOWED_PROTOCOLS
     )
