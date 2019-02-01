@@ -13,6 +13,9 @@ def get_bleach_default_options():
     if hasattr(settings, "BLEACH_ALLOWED_STYLES"):
         bleach_args["styles"] = settings.BLEACH_ALLOWED_STYLES
 
+    if hasattr(settings, "BLEACH_ALLOWED_PROTOCOLS"):
+        bleach_args["protocols"] = settings.BLEACH_ALLOWED_PROTOCOLS
+
     if hasattr(settings, "BLEACH_STRIP_TAGS"):
         bleach_args["strip"] = settings.BLEACH_STRIP_TAGS
 

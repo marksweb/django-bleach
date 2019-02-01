@@ -37,8 +37,8 @@ class BleachField(forms.CharField):
     widget = default_widget
 
     def __init__(self, allowed_tags=None, allowed_attributes=None,
-                 allowed_styles=None, strip_comments=None, strip_tags=None,
-                 *args, **kwargs):
+                 allowed_styles=None, allowed_protocols=None,
+                 strip_comments=None, strip_tags=None, *args, **kwargs):
 
         self.widget = default_widget
 
@@ -52,6 +52,8 @@ class BleachField(forms.CharField):
             self.bleach_options['attributes'] = allowed_attributes
         if allowed_styles is not None:
             self.bleach_options['styles'] = allowed_styles
+        if allowed_protocols is not None:
+            self.bleach_options['protocols'] = allowed_protocols
         if strip_tags is not None:
             self.bleach_options['strip'] = strip_tags
         if strip_comments is not None:
