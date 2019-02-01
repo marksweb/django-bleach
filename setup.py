@@ -36,7 +36,7 @@ with open(path.join(this_directory, 'README.rst')) as f:
 
 setup(
     name='django-bleach',
-    version="0.4.1",
+    version="0.4.2",
     description='Easily use bleach with Django models and templates',
     long_description=long_description,
     author='Mark Walker',
@@ -45,11 +45,11 @@ setup(
     license='MIT',
     packages=find_packages(),
     install_requires=[
-        'bleach',
+        'bleach>=1.5.0',
         'Django>=1.8',
     ],
     tests_require=[
-        'bleach',
+        'bleach>=1.5.0',
         'tox'
     ],
     cmdclass={'test': Tox},
