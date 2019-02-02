@@ -1,9 +1,5 @@
 language: python
 
-env:
-  global:
-    - CC_TEST_REPORTER_ID=55a1b8d1c581d2c728cc33a81be686cb72e571d9381dec36272ccd0408036c7a
-
 sudo: false
 
 matrix:
@@ -36,7 +32,7 @@ matrix:
       env: TOX_ENV=py27-django111
 
 install:
-  - pip install tox coverage
+  - pip install tox coverage codecov
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -48,3 +44,6 @@ script:
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+after_success:
+  - codecov
