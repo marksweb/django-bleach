@@ -117,7 +117,7 @@ class TestBleachField(TestCase):
                 'no_strip': "<h1>Heading</h1>",
                 'bleach_strip': "<!-- script here -->"
                                 "<script>alert(\"Hello World\")</script>",
-                'bleach_attrs': "<a href=\"https://www.google.com\" "
+                'bleach_attrs': "<a href=\"http://www.google.com\" "
                                 "target=\"_blank\">google.com</a>",
                 'bleach_styles': "<li style=\"color: white\">item</li>"
             }
@@ -136,7 +136,7 @@ class TestBleachField(TestCase):
             )
             self.assertEqual(
                 form.cleaned_data['bleach_attrs'],
-                '<a href="https://www.google.com">google.com</a>'
+                '<a>google.com</a>'
             )
             self.assertNotEqual(
                 form.cleaned_data['bleach_styles'],

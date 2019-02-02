@@ -37,7 +37,7 @@ See the bleach documentation for their use:
 
 In addition to the bleach-specific arguments, the ``BleachField`` model field
 accepts all of the normal field attributes. Behind the scenes, it is a
-``TextField``, and accepts all the same arguments as the default ``TextField``\s do.
+``TextField``, and accepts all the same arguments as ``TextField``.
 
 The field does not specify any formfield to use, and falls back on the default
 ``CharField`` and ``Textarea`` used by ``TextFields``. You must override the
@@ -79,12 +79,26 @@ The ``BleachField`` form field takes exactly the same arguments as the
 In your templates
 =================
 
-If you have a peice of content from somewhere that needs to be printed in a
+If you have a piece of content from somewhere that needs to be printed in a
 template, you can use the ``bleach`` filter::
 
     {% load bleach_tags %}
 
     {{ some_unsafe_content|bleach }}
 
-The filter takes no arguments. It uses the default settings defined in your
-application settings.
+It uses the ``ALLOWED_TAGS`` setting in your application, or optionally,
+``bleach`` can pass tags::
+
+    {% load bleach_tags %}
+
+    {{ some_unsafe_content|bleach:"p,span" }}
+
+If you have content which doesn't contain HTML, but contains links or email
+addresses, you can also use the ``bleach_linkify`` filter to convert
+content to links::
+
+
+    {% load bleach_tags %}
+
+    {{ some_safe_content|bleach_linkify }}
+

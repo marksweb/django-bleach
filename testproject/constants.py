@@ -4,7 +4,6 @@ ALLOWED_ATTRIBUTES = {
 }
 
 ALLOWED_PROTOCOLS = [
-    'http',
     'https',
     'data',
 ]
