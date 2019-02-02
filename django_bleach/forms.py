@@ -10,6 +10,7 @@ from django_bleach.utils import get_bleach_default_options
 
 
 def load_widget(path):
+    """ Load custom widget for the form field """
     i = path.rfind('.')
     module, attr = path[:i], path[i + 1:]
     try:
@@ -28,19 +29,22 @@ def load_widget(path):
     return cls
 
 
-default_widget = forms.Textarea
-if hasattr(settings, 'BLEACH_DEFAULT_WIDGET'):
-    default_widget = load_widget(settings.BLEACH_DEFAULT_WIDGET)
+def get_default_widget():
+    """ Get the default widget or the widget defined in settings """
+    default_widget = forms.Textarea
+    if hasattr(settings, 'BLEACH_DEFAULT_WIDGET'):
+        default_widget = load_widget(settings.BLEACH_DEFAULT_WIDGET)
+    return default_widget
 
 
 class BleachField(forms.CharField):
-    widget = default_widget
+    """ Bleach form field """
 
     def __init__(self, allowed_tags=None, allowed_attributes=None,
                  allowed_styles=None, allowed_protocols=None,
                  strip_comments=None, strip_tags=None, *args, **kwargs):
 
-        self.widget = default_widget
+        self.widget = get_default_widget()
 
         super(BleachField, self).__init__(*args, **kwargs)
 

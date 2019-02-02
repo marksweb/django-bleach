@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     'django_bleach',
+    'testproject'
 ]
 
 LANGUAGE_CODE = "en"

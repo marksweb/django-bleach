@@ -22,12 +22,14 @@ completely optional::
     # Which CSS properties are allowed in 'style' attributes (assuming style is
     # an allowed attribute)
     BLEACH_ALLOWED_STYLES = [
-        'font-family', 'font-weight', 'text-decoration', 'font-variant']
+        'font-family', 'font-weight', 'text-decoration', 'font-variant'
+    ]
 
     # Which protocols (and pseudo-protocols) are allowed in 'src' attributes
     # (assuming src is an allowed attribute)
     BLEACH_ALLOWED_PROTOCOLS = [
-        'http', 'https', 'data']
+        'http', 'https', 'data'
+    ]
 
     # Strip unknown tags if True, replace with HTML escaped characters if False
     BLEACH_STRIP_TAGS = True

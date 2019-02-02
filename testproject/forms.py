@@ -1,25 +1,16 @@
 from django import forms
 
 from django_bleach.forms import BleachField
+from testproject.constants import (
+    ALLOWED_ATTRIBUTES,
+    ALLOWED_PROTOCOLS,
+    ALLOWED_STYLES,
+    ALLOWED_TAGS
+)
 
-#: List of allowed tags
-ALLOWED_TAGS = [
-    'a',
-    'li',
-    'ul',
-]
 
-ALLOWED_ATTRIBUTES = {
-    'a': ['href', 'title'],
-    'li': ['class'],
-    'ul': ['class']
-}
-
-ALLOWED_PROTOCOLS = [
-    'http',
-    'https',
-    'data',
-]
+class CustomBleachWidget(forms.Textarea):
+    pass
 
 
 class BleachForm(forms.Form):
@@ -30,8 +21,15 @@ class BleachForm(forms.Form):
         allowed_tags=[]
     )
 
+    no_strip = BleachField(
+        max_length=100,
+        allowed_tags=None,
+        allowed_attributes=None
+    )
+
     bleach_strip = BleachField(
         max_length=100,
+        strip_comments=True,
         strip_tags=True,
         allowed_tags=ALLOWED_TAGS
     )
@@ -39,12 +37,13 @@ class BleachForm(forms.Form):
         max_length=100,
         strip_tags=False,
         allowed_tags=ALLOWED_TAGS,
+        allowed_protocols=ALLOWED_PROTOCOLS,
         allowed_attributes=ALLOWED_ATTRIBUTES
     )
-    bleach_attrs = BleachField(
+    bleach_styles = BleachField(
         max_length=100,
         strip_tags=False,
+        allowed_attributes=['style'],
         allowed_tags=ALLOWED_TAGS,
-        allowed_attributes=ALLOWED_ATTRIBUTES,
-        allowed_protocols=ALLOWED_PROTOCOLS
+        allowed_styles=ALLOWED_STYLES
     )

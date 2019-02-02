@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-from os import path
+import codecs
+import os
+import re
 import sys
 
 from setuptools import setup, find_packages
@@ -29,21 +31,44 @@ class Tox(test_command):
         sys.exit(errno)
 
 
-this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.rst')) as f:
-    long_description = f.read()
+def read(*parts):
+    file_path = os.path.join(os.path.dirname(__file__), *parts)
+    return codecs.open(file_path, encoding='utf-8').read()
+
+
+def find_variable(variable, *parts):
+    version_file = read(*parts)
+    version_match = re.search(r"^{0} = ['\"]([^'\"]*)['\"]".format(variable), version_file, re.M)
+    if version_match:
+        return str(version_match.group(1))
+    raise RuntimeError("Unable to find version string.")
+
+
+version = find_variable('__version__', 'django_bleach', '__init__.py')
+
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist upload')
+    os.system('python setup.py bdist_wheel upload')
+    sys.exit()
+
+
+if sys.argv[-1] == 'tag':
+    print("Tagging the version on github:")
+    os.system("git tag -a %s -m 'version %s'" % (version, version))
+    os.system("git push --tags")
+    sys.exit()
 
 
 setup(
     name='django-bleach',
-    version="0.4.2",
+    version=version,
     description='Easily use bleach with Django models and templates',
-    long_description=long_description,
-    author='Mark Walker',
+    long_description=read('README.rst'),
+    author=find_variable('__author__', 'django_bleach', '__init__.py'),
     author_email='theshow@gmail.com',
     url='https://github.com/marksweb/django-bleach',
     license='MIT',
-    packages=find_packages(),
+    packages=find_packages(exclude=('test_project*',)),
     install_requires=[
         'bleach>=1.5.0',
         'Django>=1.8',
