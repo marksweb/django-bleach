@@ -1,16 +1,19 @@
 django-bleach - Bleach and sanitise user HTML
 =============================================
 
-.. image:: https://api.codacy.com/project/badge/Grade/c34f923ab0a84a6f96728866c749d511
-   :alt: Codacy Badge
-   :target: https://app.codacy.com/app/marksweb/django-bleach?utm_source=github.com&utm_medium=referral&utm_content=marksweb/django-bleach&utm_campaign=Badge_Grade_Dashboard
+.. image:: https://travis-ci.org/marksweb/django-bleach.svg?branch=master
+   :target: https://travis-ci.org/marksweb/django-bleach
 
 .. image:: http://img.shields.io/pypi/v/django-bleach.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: Latest Version
 
-.. image:: https://travis-ci.org/marksweb/django-bleach.svg?branch=master
-   :target: https://travis-ci.org/marksweb/django-bleach
+.. image:: https://codecov.io/gh/marksweb/django-bleach/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/marksweb/django-bleach
+
+.. image:: https://api.codacy.com/project/badge/Grade/c34f923ab0a84a6f96728866c749d511
+   :alt: Codacy Badge
+   :target: https://app.codacy.com/app/marksweb/django-bleach?utm_source=github.com&utm_medium=referral&utm_content=marksweb/django-bleach&utm_campaign=Badge_Grade_Dashboard
 
 .. image:: http://img.shields.io/pypi/dm/django-bleach.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-bleach/
