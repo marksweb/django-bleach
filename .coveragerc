@@ -3,9 +3,10 @@ branch = True
 source =
     django_bleach
 omit =
-    ../django_bleach/*tests*
-    ../tox/*
+    */tests/*
 [report]
     precision = 1
 [html]
     directory = ../htmlcov
+[xml]
+    output = ../coverage.xml
