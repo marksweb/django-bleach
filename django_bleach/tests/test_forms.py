@@ -1,5 +1,5 @@
-from django.conf import settings
-from django.test import override_settings, TestCase
+from django.test import TestCase
+from mock import patch
 
 from testproject.forms import BleachForm
 
@@ -103,49 +103,48 @@ class TestBleachField(TestCase):
             '<ul><li>one</li><li>two</li></ul>'
         )
 
-    def test_custom_widget(self):
+    @patch('django_bleach.forms.settings',
+           BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
+    def test_custom_widget(self, settings):
 
-        with self.settings(
-            BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget'
-        ):
-            self.assertEqual(
-                settings.BLEACH_DEFAULT_WIDGET,
-                'testproject.forms.CustomBleachWidget'
-            )
-            test_data = {
-                'no_tags': "<h1>Heading</h1>",
-                'no_strip': "<h1>Heading</h1>",
-                'bleach_strip': "<!-- script here -->"
-                                "<script>alert(\"Hello World\")</script>",
-                'bleach_attrs': "<a href=\"http://www.google.com\" "
-                                "target=\"_blank\">google.com</a>",
-                'bleach_styles': "<li style=\"color: white\">item</li>"
-            }
-            form = BleachForm(data=test_data)
-            form.is_valid()
-            self.assertEqual(
-                form.cleaned_data['no_tags'], 'Heading'
-            )
-            self.assertEqual(
-                form.cleaned_data['no_strip'],
-                '&lt;h1&gt;Heading&lt;/h1&gt;'
-            )
-            self.assertEqual(
-                form.cleaned_data['bleach_strip'],
-                'alert("Hello World")'
-            )
-            self.assertEqual(
-                form.cleaned_data['bleach_attrs'],
-                '<a>google.com</a>'
-            )
-            self.assertNotEqual(
-                form.cleaned_data['bleach_styles'],
-                test_data['bleach_styles']
-            )
+        self.assertEqual(
+            settings.BLEACH_DEFAULT_WIDGET,
+            'testproject.forms.CustomBleachWidget'
+        )
+        test_data = {
+            'no_tags': "<h1>Heading</h1>",
+            'no_strip': "<h1>Heading</h1>",
+            'bleach_strip': "<!-- script here -->"
+                            "<script>alert(\"Hello World\")</script>",
+            'bleach_attrs': "<a href=\"http://www.google.com\" "
+                            "target=\"_blank\">google.com</a>",
+            'bleach_styles': "<li style=\"color: white\">item</li>"
+        }
+        form = BleachForm(data=test_data)
+        form.is_valid()
+        self.assertEqual(
+            form.cleaned_data['no_tags'], 'Heading'
+        )
+        self.assertEqual(
+            form.cleaned_data['no_strip'],
+            '&lt;h1&gt;Heading&lt;/h1&gt;'
+        )
+        self.assertEqual(
+            form.cleaned_data['bleach_strip'],
+            'alert("Hello World")'
+        )
+        self.assertEqual(
+            form.cleaned_data['bleach_attrs'],
+            '<a>google.com</a>'
+        )
+        self.assertNotEqual(
+            form.cleaned_data['bleach_styles'],
+            test_data['bleach_styles']
+        )
 
-    @override_settings(
-        BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
-    def test_custom_widget2(self):
+    @patch('django_bleach.forms.settings',
+           BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
+    def test_custom_widget2(self, settings):
         self.assertEqual(
             settings.BLEACH_DEFAULT_WIDGET,
             'testproject.forms.CustomBleachWidget'

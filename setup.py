@@ -46,9 +46,8 @@ def find_variable(variable, *parts):
 
 version = find_variable('__version__', 'django_bleach', '__init__.py')
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    os.system('python setup.py bdist_wheel upload')
+if sys.argv[-1] == 'build':
+    os.system('python setup.py sdist bdist_wheel')
     sys.exit()
 
 
@@ -75,6 +74,7 @@ setup(
     ],
     tests_require=[
         'bleach>=1.5.0',
+        'mock',
         'tox'
     ],
     cmdclass={'test': Tox},

@@ -3,23 +3,17 @@ from django.conf import settings
 
 def get_bleach_default_options():
     bleach_args = {}
+    bleach_settings = {
+        'BLEACH_ALLOWED_TAGS': 'tags',
+        'BLEACH_ALLOWED_ATTRIBUTES': 'attributes',
+        'BLEACH_ALLOWED_STYLES': 'styles',
+        'BLEACH_STRIP_TAGS': 'strip',
+        'BLEACH_STRIP_COMMENTS': 'strip_comments',
+        'BLEACH_ALLOWED_PROTOCOLS': 'protocols'
+    }
 
-    if hasattr(settings, "BLEACH_ALLOWED_TAGS"):
-        bleach_args["tags"] = settings.BLEACH_ALLOWED_TAGS
-
-    if hasattr(settings, "BLEACH_ALLOWED_ATTRIBUTES"):
-        bleach_args["attributes"] = settings.BLEACH_ALLOWED_ATTRIBUTES
-
-    if hasattr(settings, "BLEACH_ALLOWED_STYLES"):
-        bleach_args["styles"] = settings.BLEACH_ALLOWED_STYLES
-
-    if hasattr(settings, "BLEACH_ALLOWED_PROTOCOLS"):
-        bleach_args["protocols"] = settings.BLEACH_ALLOWED_PROTOCOLS
-
-    if hasattr(settings, "BLEACH_STRIP_TAGS"):
-        bleach_args["strip"] = settings.BLEACH_STRIP_TAGS
-
-    if hasattr(settings, "BLEACH_STRIP_COMMENTS"):
-        bleach_args["strip_comments"] = settings.BLEACH_STRIP_COMMENTS
+    for setting, kwarg in bleach_settings.items():
+        if hasattr(settings, setting):
+            bleach_args[kwarg] = getattr(settings, setting)
 
     return bleach_args
