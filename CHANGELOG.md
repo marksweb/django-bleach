@@ -1,3 +1,14 @@
+Version 0.5.1
+=============
+*  100% coverage achieved
+*  Changelog updated with `0.5.0` changes. (Thanks dyve)
+
+
+Version 0.5.0
+=============
+*  Added support for bleach's `allowed_protocols` kwarg. (Thanks blag)
+*  Bleach dependency is now `>=1.5.0`
+
 Version 0.4.1
 =============
 *  Option to pass *allowed tags* to the `bleach` template filter added by Rafał Selewońko.
