@@ -8,9 +8,9 @@ class TestBleachField(TestCase):
 
     def test_empty(self):
         """ Test no data """
-        with self.assertRaises(TypeError):
-            form = BleachForm(data={})
-            form.is_valid()
+        form = BleachForm(data={})
+        form.is_valid()
+        self.assertEqual(form.fields['no_tags'].to_python(None), u'')
 
     def test_bleaching(self):
         """ Test values are bleached """
