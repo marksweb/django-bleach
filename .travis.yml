@@ -31,6 +31,12 @@ matrix:
     - python: "2.7"
       env: TOX_ENV=py27-django111
 
+before_install:
+  - sudo apt-get autoremove sqlite3
+  - sudo apt-get -y update
+  - sudo apt-get install sqlite3
+  - sudo sqlite3 -version
+
 install:
   - pip install tox coverage codecov
 
