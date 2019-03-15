@@ -34,7 +34,7 @@ matrix:
 before_install:
   - sudo apt-get autoremove sqlite3
   - sudo apt-get -y update
-  - sudo apt-get install sqlite3
+  - sudo apt-get install sqlite3=3.8.3
   - sudo sqlite3 -version
 
 install:
