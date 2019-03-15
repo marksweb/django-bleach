@@ -1,8 +1,11 @@
+Version 0.5.2
+=============
+*  Fix for `BleachField` receiving a `None` value. (Thanks MrkGrgsn)
+
 Version 0.5.1
 =============
 *  100% coverage achieved
 *  Changelog updated with `0.5.0` changes. (Thanks dyve)
-
 
 Version 0.5.0
 =============
