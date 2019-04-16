@@ -28,9 +28,12 @@ class BleachField(models.TextField):
             self.bleach_kwargs['strip_comments'] = strip_comments
 
     def pre_save(self, model_instance, add):
-        clean_value = clean(
-            getattr(model_instance, self.attname),
-            **self.bleach_kwargs
-        )
-        setattr(model_instance, self.attname, clean_value)
-        return clean_value
+        data = getattr(model_instance, self.attname)
+        if data:
+            clean_value = clean(
+                data,
+                **self.bleach_kwargs
+            )
+            setattr(model_instance, self.attname, clean_value)
+            return clean_value
+        return data
