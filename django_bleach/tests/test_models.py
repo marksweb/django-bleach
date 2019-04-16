@@ -47,3 +47,40 @@ class TestBleachModelField(TestCase):
         for key, value in test_data.items():
             obj = BleachContent.objects.create(content=value)
             self.assertEqual(obj.content, expected_values[key])
+
+
+class BleachNullableContent(models.Model):
+    """ Bleach test model"""
+    content = BleachField(
+        allowed_attributes=ALLOWED_ATTRIBUTES,
+        allowed_protocols=ALLOWED_PROTOCOLS,
+        allowed_styles=ALLOWED_STYLES,
+        allowed_tags=ALLOWED_TAGS,
+        strip_comments=True,
+        strip_tags=True,
+        blank=True,
+        null=True
+    )
+
+
+class TestBleachNullableModelField(TestCase):
+    """ Test model field """
+
+    def test_bleaching(self):
+        """ Test values are bleached """
+        test_data = {
+            'none': None,
+            'empty': "",
+            'whitespaces': "   ",
+            'linebreak': "\n",
+        }
+        expected_values = {
+            'none': None,
+            'empty': "",
+            'whitespaces': "   ",
+            'linebreak': "\n",
+        }
+
+        for key, value in test_data.items():
+            obj = BleachNullableContent.objects.create(content=value)
+            self.assertEqual(obj.content, expected_values[key])
