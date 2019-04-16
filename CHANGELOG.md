@@ -1,3 +1,7 @@
+Version 0.5.3
+=============
+*  Fix for `BleachField` set to allow `blank` or `null`. (Thanks denisroldan)
+
 Version 0.5.2
 =============
 *  Fix for `BleachField` receiving a `None` value. (Thanks MrkGrgsn)
