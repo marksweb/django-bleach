@@ -39,6 +39,7 @@ def get_default_widget():
 
 class BleachField(forms.CharField):
     """ Bleach form field """
+    empty_values = [None, '', [], (), {}]
 
     def __init__(self, allowed_tags=None, allowed_attributes=None,
                  allowed_styles=None, allowed_protocols=None,
@@ -68,11 +69,5 @@ class BleachField(forms.CharField):
         Strips any dodgy HTML tags from the input
         """
         if value in self.empty_values:
-            try:
-                return self.empty_value
-            except AttributeError:
-                # CharField.empty_value was introduced in Django 1.11; in prior
-                # versions a unicode string was returned for empty values in
-                # all cases.
-                return u''
+            return value
         return bleach.clean(value, **self.bleach_options)

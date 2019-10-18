@@ -10,7 +10,10 @@ class TestBleachField(TestCase):
         """ Test no data """
         form = BleachForm(data={})
         form.is_valid()
-        self.assertEqual(form.fields['no_tags'].to_python(None), u'')
+        self.assertEqual(form.fields['no_tags'].to_python(None), None)
+        self.assertEqual(form.fields['no_tags'].to_python(''), '')
+        self.assertEqual(form.fields['no_tags'].to_python([]), [])
+        self.assertEqual(form.fields['no_tags'].to_python({}), {})
 
     def test_bleaching(self):
         """ Test values are bleached """

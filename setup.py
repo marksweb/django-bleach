@@ -38,7 +38,9 @@ def read(*parts):
 
 def find_variable(variable, *parts):
     version_file = read(*parts)
-    version_match = re.search(r"^{0} = ['\"]([^'\"]*)['\"]".format(variable), version_file, re.M)
+    version_match = re.search(
+        r"^{0} = ['\"]([^'\"]*)['\"]".format(variable), version_file, re.M
+    )
     if version_match:
         return str(version_match.group(1))
     raise RuntimeError("Unable to find version string.")
@@ -67,10 +69,10 @@ setup(
     author_email='theshow@gmail.com',
     url='https://github.com/marksweb/django-bleach',
     license='MIT',
-    packages=find_packages(exclude=('test_project*',)),
+    packages=find_packages(exclude=('testproject*',)),
     install_requires=[
         'bleach>=1.5.0',
-        'Django>=1.8',
+        'Django>=1.11',
     ],
     tests_require=[
         'bleach>=1.5.0',
@@ -88,6 +90,7 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.8',
         'Framework :: Django',
         'Development Status :: 5 - Production/Stable',
     ],

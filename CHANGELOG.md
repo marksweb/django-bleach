@@ -1,3 +1,9 @@
+Version 0.6.0
+=============
+*  Introduced testing against Python 3.8
+*  Drop support for Django <1.11
+*  Test coverage at 100%
+
 Version 0.5.3
 =============
 *  Fix for `BleachField` set to allow `blank` or `null`. (Thanks denisroldan)
