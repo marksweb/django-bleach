@@ -62,7 +62,7 @@ class TestBleachTemplates(TestCase):
             '<a href="http://{0}" rel="nofollow">{0}</a>'.format(url),
             rendered_template
         )
-        
+
     def test_linkify_none(self):
         """ Test bleach linkify with None as an input """
         context = Context({'none_value': None})
