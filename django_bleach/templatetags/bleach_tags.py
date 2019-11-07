@@ -12,7 +12,7 @@ register = template.Library()
 def bleach_value(value, tags=None):
     if value is None:
         return None
-    
+
     bleach_args = get_bleach_default_options()
     if tags is not None:
         args = bleach_args.copy()
@@ -37,5 +37,5 @@ def bleach_linkify(value):
     """
     if value is None:
         return None
-    
+
     return bleach.linkify(value, parse_email=True)
