@@ -20,6 +20,21 @@ class TestBleachTemplates(TestCase):
             rendered_template
         )
 
+    def test_bleaching_none(self):
+        """ Test that None is handled properly as an input """
+        context = Context(
+            {'none_value': None}
+        )
+        template_to_render = Template(
+            '{% load bleach_tags %}'
+            '{{ none_value|bleach }}'
+        )
+        rendered_template = template_to_render.render(context)
+        self.assertEqual(
+            'None',
+            rendered_template
+        )
+
     def test_bleaching_tags(self):
         """ Test provided tags are kept """
         context = Context(
@@ -45,5 +60,18 @@ class TestBleachTemplates(TestCase):
         rendered_template = template_to_render.render(context)
         self.assertInHTML(
             '<a href="http://{0}" rel="nofollow">{0}</a>'.format(url),
+            rendered_template
+        )
+
+    def test_linkify_none(self):
+        """ Test bleach linkify with None as an input """
+        context = Context({'none_value': None})
+        template_to_render = Template(
+            '{% load bleach_tags %}'
+            '{{ none_value|bleach_linkify }}'
+        )
+        rendered_template = template_to_render.render(context)
+        self.assertEqual(
+            'None',
             rendered_template
         )

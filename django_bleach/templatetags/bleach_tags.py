@@ -10,6 +10,9 @@ register = template.Library()
 
 @register.filter(name='bleach')
 def bleach_value(value, tags=None):
+    if value is None:
+        return None
+
     bleach_args = get_bleach_default_options()
     if tags is not None:
         args = bleach_args.copy()
@@ -32,4 +35,7 @@ def bleach_linkify(value):
         2. urls found in attributes
         3. email addresses
     """
+    if value is None:
+        return None
+
     return bleach.linkify(value, parse_email=True)
