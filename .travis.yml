@@ -49,9 +49,6 @@ jobs:
     - name: "Python 3.8 with django 2.2"
       python:  "3.8"
       env: TOX_ENV=py38-django22
-    - name: "Python 3.9-dev with django 2.2"
-      python:  "3.9-dev"
-      env: TOX_ENV=py39-django22
 
 install:
   - pip install tox coverage codecov
