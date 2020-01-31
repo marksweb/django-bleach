@@ -2,40 +2,56 @@ dist: xenial
 
 language: python
 
-sudo: false
-
-matrix:
+jobs:
   include:
-    - python: "3.6"
+    - name: "flake8"
+      python: "3.6"
       env: TOX_ENV=flake8
-    - python: "3.6"
+    - name: "coverage"
+      python: "3.6"
       env: TOX_ENV=coverage
-    - python: "2.7"
+    - name: "Python 2.7 with django 1.11"
+      python: "2.7"
       env: TOX_ENV=py27-django111
-    - python: "3.6"
+    - name: "Python 3.6 with django 1.11"
+      python: "3.6"
       env: TOX_ENV=py36-django111
-    - python: "3.6"
+    - name: "Python 3.6 with django 2.0s"
+      python:  "3.6"
       env: TOX_ENV=py36-django20
-    - python: "3.6"
+    - name: "Python 3.6 with django 2.1"
+      python:  "3.6"
       env: TOX_ENV=py36-django21
-    - python: "3.6"
+    - name: "Python 3.6 with django 2.2"
+      python:  "3.6"
       env: TOX_ENV=py36-django22
-    - python: "3.7"
+    - name: "Python 3.7 with django 1.11"
+      python:  "3.7"
       env: TOX_ENV=py37-django111
-    - python: "3.7"
+    - name: "Python 3.7 with django 2.0"
+      python:  "3.7"
       env: TOX_ENV=py37-django20
-    - python: "3.7"
+    - name: "Python 3.7 with django 2.1"
+      python:  "3.7"
       env: TOX_ENV=py37-django21
-    - python: "3.7"
+    - name: "Python 3.7 with django 2.2"
+      python:  "3.7"
       env: TOX_ENV=py37-django22
-    - python: "3.8"
+    - name: "Python 3.8 with django 1.11"
+      python:  "3.8"
       env: TOX_ENV=py38-django111
-    - python: "3.8"
+    - name: "Python 3.8 with django 2.0"
+      python:  "3.8"
       env: TOX_ENV=py38-django20
-    - python: "3.8"
+    - name: "Python 3.8 with django 2.1"
+      python:  "3.8"
       env: TOX_ENV=py38-django21
-    - python: "3.8"
+    - name: "Python 3.8 with django 2.2"
+      python:  "3.8"
       env: TOX_ENV=py38-django22
+    - name: "Python 3.9-dev with django 2.2"
+      python:  "3.9-dev"
+      env: TOX_ENV=py39-django22
 
 install:
   - pip install tox coverage codecov
