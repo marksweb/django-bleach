@@ -15,7 +15,7 @@ Setup
 
 3. Configure ``django_bleach``. It comes with some sensible defaults, but you
    will probably want to tweak the settings for your application. See the
-   :role:`settings` page for more information
+   :ref:`settings` page for more information
 
 3. Add a ``django_bleach.models.BleachField`` to a model, a
    ``django_bleach.forms.BleachField`` to a form, or use the ``bleach``

@@ -6,6 +6,7 @@ import sys
 
 from setuptools import setup, find_packages
 from setuptools.command.test import test as test_command
+from sphinx.setup_command import BuildDoc
 
 
 class Tox(test_command):
@@ -46,7 +47,9 @@ def find_variable(variable, *parts):
     raise RuntimeError("Unable to find version string.")
 
 
-version = find_variable('__version__', 'django_bleach', '__init__.py')
+name = 'django-bleach'
+release = find_variable('__version__', 'django_bleach', '__init__.py')
+version = release.rstrip('.')
 
 if sys.argv[-1] == 'build':
     os.system('python setup.py sdist bdist_wheel')
@@ -61,7 +64,7 @@ if sys.argv[-1] == 'tag':
 
 
 setup(
-    name='django-bleach',
+    name=name,
     version=version,
     description='Easily use bleach with Django models and templates',
     long_description=read('README.rst'),
@@ -77,9 +80,22 @@ setup(
     tests_require=[
         'bleach>=1.5.0',
         'mock',
+        'sphinx',
         'tox'
     ],
-    cmdclass={'test': Tox},
+    cmdclass={
+        'build_sphinx': BuildDoc,
+        'test': Tox
+    },
+    command_options={
+        'build_sphinx': {
+            'project': ('setup.py', name),
+            'version': ('setup.py', version),
+            'release': ('setup.py', release),
+            'source_dir': ('setup.py', 'docs'),
+            'build_dir': ('setup.py', './docs/_build')
+        }
+    },
     package_data={},
     classifiers=[
         'Environment :: Web Environment',
