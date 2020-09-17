@@ -152,6 +152,6 @@ addresses in text that may be an HTML fragment to links, while preserving:
 
 
 .. _bleach: https://github.com/mozilla/bleach "Bleach"
-.. _bleach documentation: https://github.com/jsocol/bleach/blob/master/README.rst "Bleach documentation - parameters"
+.. _bleach documentation: https://bleach.readthedocs.io/en/latest/clean.html "Bleach documentation"
 .. _django-ckeditor: https://github.com/shaunsephton/django-ckeditor "Django CKEditor widget"
 .. _linkify: https://bleach.readthedocs.io/en/latest/linkify.html?highlight=linkify#bleach.linkify "linkify"
