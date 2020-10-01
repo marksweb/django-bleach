@@ -151,7 +151,7 @@ addresses in text that may be an HTML fragment to links, while preserving:
 3. email addresses
 
 
-.. _bleach: https://github.com/mozilla/bleach "Bleach"
-.. _bleach documentation: https://bleach.readthedocs.io/en/latest/clean.html "Bleach documentation"
-.. _django-ckeditor: https://github.com/shaunsephton/django-ckeditor "Django CKEditor widget"
+.. _bleach: https://github.com/mozilla/bleach 
+.. _bleach documentation: https://bleach.readthedocs.io/en/latest/clean.html 
+.. _django-ckeditor: https://github.com/shaunsephton/django-ckeditor
 .. _linkify: https://bleach.readthedocs.io/en/latest/linkify.html?highlight=linkify#bleach.linkify "linkify"
