@@ -51,7 +51,7 @@ jobs:
       env: TOX_ENV=py38-django22
 
 install:
-  - pip install tox coverage codecov
+  - pip install tox coverage codecov sphinx
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
