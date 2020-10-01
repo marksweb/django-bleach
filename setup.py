@@ -6,7 +6,10 @@ import sys
 
 from setuptools import setup, find_packages
 from setuptools.command.test import test as test_command
-from sphinx.setup_command import BuildDoc
+try:
+    from sphinx.setup_command import BuildDoc
+except ImportError:
+    BuildDoc = None
 
 
 class Tox(test_command):
