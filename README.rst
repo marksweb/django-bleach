@@ -66,6 +66,9 @@ Setup
         # Strip comments, or leave them in.
         BLEACH_STRIP_COMMENTS = False
 
+        # Allow relative links
+        BLEACH_ALLOW_RELATIVE = False
+
 4. Select the default widget for bleach fields. This defaults to
    ``django.forms.Textarea``, but you will probably want to replace it with a
    WYSIWYG editor, or something similar::
