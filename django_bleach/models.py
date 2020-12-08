@@ -15,17 +15,17 @@ class BleachField(models.TextField):
         self.bleach_kwargs = get_bleach_default_options()
 
         if allowed_tags:
-            self.bleach_kwargs['tags'] = allowed_tags
+            self.bleach_kwargs["tags"] = allowed_tags
         if allowed_attributes:
-            self.bleach_kwargs['attributes'] = allowed_attributes
+            self.bleach_kwargs["attributes"] = allowed_attributes
         if allowed_styles:
-            self.bleach_kwargs['styles'] = allowed_styles
+            self.bleach_kwargs["styles"] = allowed_styles
         if allowed_protocols:
-            self.bleach_kwargs['protocols'] = allowed_protocols
+            self.bleach_kwargs["protocols"] = allowed_protocols
         if strip_tags:
-            self.bleach_kwargs['strip'] = strip_tags
+            self.bleach_kwargs["strip"] = strip_tags
         if strip_comments:
-            self.bleach_kwargs['strip_comments'] = strip_comments
+            self.bleach_kwargs["strip_comments"] = strip_comments
 
     def pre_save(self, model_instance, add):
         data = getattr(model_instance, self.attname)

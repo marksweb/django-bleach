@@ -8,7 +8,7 @@ from django_bleach.utils import get_bleach_default_options
 register = template.Library()
 
 
-@register.filter(name='bleach')
+@register.filter(name="bleach")
 def bleach_value(value, tags=None):
     if value is None:
         return None
@@ -16,7 +16,7 @@ def bleach_value(value, tags=None):
     bleach_args = get_bleach_default_options()
     if tags is not None:
         args = bleach_args.copy()
-        args['tags'] = tags.split(',')
+        args["tags"] = tags.split(",")
     else:
         args = bleach_args
     bleached_value = bleach.clean(value, **args)

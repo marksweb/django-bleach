@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.test import TestCase
 from django.template import Context, Template
 
@@ -8,7 +9,7 @@ class TestBleachTemplates(TestCase):
     def test_bleaching(self):
         """ Test that unsafe tags are sanitised """
         context = Context(
-            {'some_unsafe_content': '<script>alert("Hello World!")</script>'}
+            {'some_unsafe_content': '<script>alert("Hello World!")</script>'},
         )
         template_to_render = Template(
             '{% load bleach_tags %}'
@@ -73,5 +74,5 @@ class TestBleachTemplates(TestCase):
         rendered_template = template_to_render.render(context)
         self.assertEqual(
             'None',
-            rendered_template
+            rendered_template,
         )

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.exceptions import ImproperlyConfigured
 from django.forms import Textarea
 from django.test import TestCase
@@ -8,7 +9,7 @@ from django_bleach.utils import get_bleach_default_options
 
 from testproject.constants import (
     ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS,
-    ALLOWED_STYLES, ALLOWED_TAGS
+    ALLOWED_STYLES, ALLOWED_TAGS,
 )
 from testproject.forms import CustomBleachWidget
 
@@ -68,6 +69,6 @@ class TestDefaultWidget(TestCase):
 
     @patch('django_bleach.forms.settings',
            BLEACH_DEFAULT_WIDGET='testproject.forms2.CustomBleachWidget')
-    def test_import_Err(self, settings):
+    def test_import_err(self, settings):
         with self.assertRaises(ImproperlyConfigured):
             get_default_widget()
