@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import django
 import os
 import sys
 
@@ -64,14 +63,8 @@ TEMPLATES = [
 USE_TZ = True
 SECRET_KEY = 'blah'
 
-if django.VERSION >= (1, 10):
-    MIDDLEWARE = ()
-else:
-    MIDDLEWARE_CLASSES = ()
-
-if django.VERSION >= (2, 2):
-    MIDDLEWARE = (
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware'
-    )
+MIDDLEWARE = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware'
+)
