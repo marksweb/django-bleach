@@ -33,7 +33,7 @@ jobs:
     - name: Run coverage
       run: |
         cd testproject
-        coverage run manage.py test --failfast django_bleach
+        coverage run --rcfile ../.coveragerc manage.py test --failfast django_bleach
 
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v1
