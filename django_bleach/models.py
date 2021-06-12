@@ -36,6 +36,7 @@ class BleachField(models.TextField):
         # If field doesn't have any choice return BleachField
         if not self.choices:
             return forms.BleachField(
+                label=self.verbose_name,
                 max_length=self.max_length,
                 allowed_tags=self.bleach_kwargs.get("tags"),
                 allowed_attributes=self.bleach_kwargs.get("attributes"),
