@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': os.path.join(PROJECT_PATH, 'django-bleach.db')
     }
 }
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 DATABASE_SUPPORTS_TRANSACTIONS = True
 
 INSTALLED_APPS = [

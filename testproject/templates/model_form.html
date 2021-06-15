@@ -1,0 +1,48 @@
+{% load bleach_tags %}
+
+<style>
+    table {
+         width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        padding: 8px;
+    }
+</style>
+
+<body>
+    <h2>Model form example</h2>
+    <strong>Note: You must migrate project to add person!</strong>
+
+    <form action="/model_form" method="post">
+        {% csrf_token %}
+
+        {{ form.errors }}
+        {{ form.as_p }}
+
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+
+    <div>
+        <h3>People list</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Biography</th>
+                </tr>
+                {% for person in people %}
+                    <tr>
+                        <td>{{person.name}}</td>
+                        <td>{{person.biography|safe}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{% url 'home' %}">Form example</a>
+</body>

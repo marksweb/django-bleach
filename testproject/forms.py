@@ -1,6 +1,7 @@
 from django import forms
 
 from django_bleach.forms import BleachField
+from testproject.models import Person
 from testproject.constants import (
     ALLOWED_ATTRIBUTES,
     ALLOWED_PROTOCOLS,
@@ -51,3 +52,10 @@ class BleachForm(forms.Form):
         allowed_tags=ALLOWED_TAGS,
         allowed_styles=ALLOWED_STYLES
     )
+
+
+class PersonForm(forms.ModelForm):
+    
+    class Meta:
+        model = Person
+        fields = '__all__'
