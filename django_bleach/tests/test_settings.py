@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.core.exceptions import ImproperlyConfigured
 from django.forms import Textarea
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from mock import patch
 
 from django_bleach.forms import get_default_widget
@@ -53,6 +53,7 @@ class TestBleachOptions(TestCase):
 class TestDefaultWidget(TestCase):
     """ Test form field widgets """
 
+    @override_settings(BLEACH_DEFAULT_WIDGET='django.forms.widgets.Textarea')
     def test_default_widget(self):
         self.assertEqual(get_default_widget(), Textarea)
 
