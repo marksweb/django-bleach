@@ -25,7 +25,7 @@ def model_form(request):
         form = PersonForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(request.path + '?ok')
+            return HttpResponseRedirect('?ok')
     else:
         form = PersonForm()
         try:
