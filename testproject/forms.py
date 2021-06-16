@@ -13,7 +13,7 @@ from testproject.constants import (
 class CustomBleachWidget(forms.Textarea):
 
     def __init__(self, attrs=None):
-        default_attrs = {'rows':15, 'cols':60}
+        default_attrs = {'rows': 15, 'cols': 60}
         default_attrs.update(attrs or {})
         super().__init__(attrs=default_attrs)
 
@@ -55,7 +55,7 @@ class BleachForm(forms.Form):
 
 
 class PersonForm(forms.ModelForm):
-    
+
     class Meta:
         model = Person
         fields = '__all__'
