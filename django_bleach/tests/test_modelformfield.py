@@ -13,7 +13,9 @@ class BleachContentModelForm(forms.ModelForm):
 class TestModelFormField(TestCase):
     @override_settings(BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
     def setUp(self):
-        self.form_field = BleachContentModelForm().fields['content']
+        model_form = BleachContentModelForm()
+        self.form_field = model_form.fields['content']
+        self.choice_form_field = model_form.fields['choice']
         self.model_field = BleachContent()._meta.get_field('content')
         self.default_widget_class = bleach_forms.get_default_widget()
 
@@ -33,5 +35,10 @@ class TestModelFormField(TestCase):
         form_allowed_args: dict = self.form_field.bleach_options
         model_allowed_args: dict = self.model_field.bleach_kwargs
 
-        for key in model_allowed_args.keys():
-            self.assertEqual(model_allowed_args[key], form_allowed_args[key])
+        self.assertEqual(model_allowed_args, form_allowed_args)
+
+    def test_with_choices(self):
+        """ Check if choices specified, use TextField's default widget (Select).
+        """
+        form_field_widget = self.choice_form_field.widget.__class__
+        self.assertEqual(form_field_widget, forms.widgets.Select)

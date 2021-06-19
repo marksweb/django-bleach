@@ -10,6 +10,10 @@ from testproject.constants import (
 
 class BleachContent(models.Model):
     """ Bleach test model"""
+    CHOICES = (
+        ('f', 'first choice'),
+        ('s', 'second choice')
+    )
     content = BleachField(
         allowed_attributes=ALLOWED_ATTRIBUTES,
         allowed_protocols=ALLOWED_PROTOCOLS,
@@ -18,6 +22,7 @@ class BleachContent(models.Model):
         strip_comments=True,
         strip_tags=True
     )
+    choice = BleachField(choices=CHOICES)
 
 
 class TestBleachModelField(TestCase):
