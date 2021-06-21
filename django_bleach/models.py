@@ -2,6 +2,7 @@ from django.db import models
 
 from bleach import clean
 
+from . import forms
 from .utils import get_bleach_default_options
 
 
@@ -26,6 +27,26 @@ class BleachField(models.TextField):
             self.bleach_kwargs["strip"] = strip_tags
         if strip_comments:
             self.bleach_kwargs["strip_comments"] = strip_comments
+
+    def formfield(self, **kwargs):
+        """
+            Makes field for ModelForm
+        """
+
+        # If field doesn't have any choice return BleachField
+        if not self.choices:
+            return forms.BleachField(
+                label=self.verbose_name,
+                max_length=self.max_length,
+                allowed_tags=self.bleach_kwargs.get("tags"),
+                allowed_attributes=self.bleach_kwargs.get("attributes"),
+                allowed_styles=self.bleach_kwargs.get("styles"),
+                allowed_protocols=self.bleach_kwargs.get("protocols"),
+                strip_tags=self.bleach_kwargs.get("strip"),
+                strip_comments=self.bleach_kwargs.get("strip_comments"),
+            )
+
+        return super(BleachField, self).formfield(**kwargs)
 
     def pre_save(self, model_instance, add):
         data = getattr(model_instance, self.attname)

@@ -3,8 +3,9 @@ try:
 except ImportError:
     from django.conf.urls.defaults import url
 
-from .views import home
+from .views import (home, model_form)
 
 urlpatterns = [
-    url(r'^$', home),
+    url('^$', home, name='home'),
+    url('^model_form$', model_form, name='model_form'),
 ]

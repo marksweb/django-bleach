@@ -1,6 +1,7 @@
 from django import forms
 
 from django_bleach.forms import BleachField
+from testproject.models import Person
 from testproject.constants import (
     ALLOWED_ATTRIBUTES,
     ALLOWED_PROTOCOLS,
@@ -10,7 +11,11 @@ from testproject.constants import (
 
 
 class CustomBleachWidget(forms.Textarea):
-    pass
+
+    def __init__(self, attrs=None):
+        default_attrs = {'rows': 15, 'cols': 60}
+        default_attrs.update(attrs or {})
+        super().__init__(attrs=default_attrs)
 
 
 class BleachForm(forms.Form):
@@ -47,3 +52,10 @@ class BleachForm(forms.Form):
         allowed_tags=ALLOWED_TAGS,
         allowed_styles=ALLOWED_STYLES
     )
+
+
+class PersonForm(forms.ModelForm):
+
+    class Meta:
+        model = Person
+        fields = '__all__'
