@@ -1,3 +1,9 @@
+Version 0.7.0
+=============
+###### 09-07-2021
+*  Default form field set to `forms.BleachField` for `models.BleachField` (Thanks [Alirezaja1384](https://github.com/Alirezaja1384))
+*  Introduced testing against Python 3.9
+
 Version 0.6.1
 =============
 ###### 07-11-2019

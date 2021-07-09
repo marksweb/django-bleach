@@ -29,9 +29,7 @@ class BleachField(models.TextField):
             self.bleach_kwargs["strip_comments"] = strip_comments
 
     def formfield(self, **kwargs):
-        """
-            Makes field for ModelForm
-        """
+        """ Makes the field for a ModelForm """
 
         # If field doesn't have any choice return BleachField
         if not self.choices:
