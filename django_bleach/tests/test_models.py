@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.test import TestCase
 
@@ -23,6 +24,7 @@ class BleachContent(models.Model):
         strip_tags=True
     )
     choice = BleachField(choices=CHOICES)
+    blank_field = BleachField(blank=True)
 
 
 class TestBleachModelField(TestCase):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import bleach
 
 from django import forms
