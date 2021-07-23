@@ -3,7 +3,9 @@ branch = True
 source =
     django_bleach
 omit =
+    .env/*
     */tests/*
+    testproject/*
 [report]
     precision = 1
 [html]
