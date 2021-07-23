@@ -1,3 +1,8 @@
+Version 0.7.1
+=============
+###### 23-07-2021
+*  Fix for [#21](https://github.com/marksweb/django-bleach/issues/21): default form field not respecting required fields.
+
 Version 0.7.0
 =============
 ###### 09-07-2021
