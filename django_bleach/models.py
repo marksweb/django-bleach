@@ -43,6 +43,7 @@ class BleachField(models.TextField):
                 allowed_protocols=self.bleach_kwargs.get("protocols"),
                 strip_tags=self.bleach_kwargs.get("strip"),
                 strip_comments=self.bleach_kwargs.get("strip_comments"),
+                required=not self.blank,
             )
 
         return super(BleachField, self).formfield(**kwargs)
