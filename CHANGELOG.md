@@ -1,3 +1,8 @@
+Version 0.7.2
+=============
+###### 27-07-2021
+*  Fix for [#23](https://github.com/marksweb/django-bleach/issues/23): `kwargs` being lost in the default form field.
+
 Version 0.7.1
 =============
 ###### 23-07-2021

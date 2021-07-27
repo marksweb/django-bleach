@@ -58,6 +58,9 @@ if sys.argv[-1] == 'build':
     os.system('python setup.py sdist bdist_wheel')
     sys.exit()
 
+if sys.argv[-1] == 'release':
+    os.system('twine upload -r django-bleach --skip-existing dist/*')
+    sys.exit()
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")
