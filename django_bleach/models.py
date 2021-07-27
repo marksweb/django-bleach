@@ -32,19 +32,19 @@ class BleachField(models.TextField):
     def formfield(self, **kwargs):
         """ Makes the field for a ModelForm """
 
-        # If field doesn't have any choice return BleachField
+        # If field doesn't have any choices return BleachField instead of `Textarea`
         if not self.choices:
-            return forms.BleachField(
-                label=self.verbose_name,
-                max_length=self.max_length,
-                allowed_tags=self.bleach_kwargs.get("tags"),
-                allowed_attributes=self.bleach_kwargs.get("attributes"),
-                allowed_styles=self.bleach_kwargs.get("styles"),
-                allowed_protocols=self.bleach_kwargs.get("protocols"),
-                strip_tags=self.bleach_kwargs.get("strip"),
-                strip_comments=self.bleach_kwargs.get("strip_comments"),
-                required=not self.blank,
-            )
+            kwargs.update({
+                'max_length': self.max_length,
+                'allowed_tags': self.bleach_kwargs.get("tags"),
+                'allowed_attributes': self.bleach_kwargs.get("attributes"),
+                'allowed_styles': self.bleach_kwargs.get("styles"),
+                'allowed_protocols': self.bleach_kwargs.get("protocols"),
+                'strip_tags': self.bleach_kwargs.get("strip"),
+                'strip_comments': self.bleach_kwargs.get("strip_comments"),
+                'required': not self.blank,
+            })
+            return forms.BleachField(**kwargs)
 
         return super(BleachField, self).formfield(**kwargs)
 
