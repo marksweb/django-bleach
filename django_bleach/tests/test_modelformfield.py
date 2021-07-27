@@ -14,7 +14,7 @@ class BleachContentModelForm(forms.ModelForm):
 
 
 class TestModelFormField(TestCase):
-    @override_settings(BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
+
     def setUp(self):
         model_form = BleachContentModelForm()
         self.form_field = model_form.fields['content']
@@ -29,6 +29,7 @@ class TestModelFormField(TestCase):
         """
         self.assertIsInstance(self.form_field, bleach_forms.BleachField)
 
+    @override_settings(BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
     def test_custom_widget(self):
         """
         Check content form field's widget is instance of default widget

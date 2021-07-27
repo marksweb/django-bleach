@@ -69,4 +69,4 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware'
 )
 
-BLEACH_DEFAULT_WIDGET = 'testproject.forms.CustomBleachWidget'
+# BLEACH_DEFAULT_WIDGET = 'testproject.forms.CustomBleachWidget'
