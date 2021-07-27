@@ -146,8 +146,7 @@ class TestBleachField(TestCase):
             test_data['bleach_styles']
         )
 
-    @patch('django_bleach.forms.settings',
-           BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
+    @patch('django_bleach.forms.settings', BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
     def test_custom_widget2(self, settings):
         self.assertEqual(
             settings.BLEACH_DEFAULT_WIDGET,
