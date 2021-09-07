@@ -29,10 +29,10 @@ class BleachField(models.TextField):
         if strip_comments:
             self.bleach_kwargs["strip_comments"] = strip_comments
 
-    def formfield(self, **kwargs):
+    def formfield(self, form_class=forms.BleachField, **kwargs):
         """ Makes the field for a ModelForm """
 
-        # If field doesn't have any choice return BleachField
+        # If field doesn't have any choices add kwargs expected by BleachField.
         if not self.choices:
             kwargs.update({
                 "max_length": self.max_length,
@@ -44,9 +44,8 @@ class BleachField(models.TextField):
                 "strip_comments": self.bleach_kwargs.get("strip_comments"),
                 "required": not self.blank,
             })
-            return forms.BleachField(**kwargs)
 
-        return super(BleachField, self).formfield(**kwargs)
+        return super(BleachField, self).formfield(form_class=form_class, **kwargs)
 
     def pre_save(self, model_instance, add):
         data = getattr(model_instance, self.attname)
