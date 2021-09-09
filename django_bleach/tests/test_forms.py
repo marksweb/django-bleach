@@ -10,13 +10,11 @@ from testproject.forms import BleachForm
 class TestBleachField(TestCase):
 
     def test_empty(self):
-        """ Test no data """
-        form = BleachForm(data={})
-        form.is_valid()
-        self.assertEqual(form.fields['no_tags'].to_python(None), None)
-        self.assertEqual(form.fields['no_tags'].to_python(''), '')
-        self.assertEqual(form.fields['no_tags'].to_python([]), [])
-        self.assertEqual(form.fields['no_tags'].to_python({}), {})
+        """ Test that the empty_value arg is returned for any input empty value """
+        for requested_empty_value in ('', None):
+            field = BleachField(empty_value=requested_empty_value)
+            for empty_value in field.empty_values:
+                self.assertEqual(field.to_python(empty_value), requested_empty_value)
 
     def test_return_type(self):
         """ Test bleached values are SafeString objects """
