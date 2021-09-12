@@ -5,6 +5,7 @@ from django import forms
 from django.core.exceptions import ImproperlyConfigured
 
 from django.conf import settings
+from django.utils.safestring import mark_safe
 from importlib import import_module
 
 from django_bleach.utils import get_bleach_default_options
@@ -67,8 +68,10 @@ class BleachField(forms.CharField):
 
     def to_python(self, value):
         """
-        Strips any dodgy HTML tags from the input
+        Strips any dodgy HTML tags from the input.
+
+        Mark the return value as template safe.
         """
         if value in self.empty_values:
             return value
-        return bleach.clean(value, **self.bleach_options)
+        return mark_safe(bleach.clean(value, **self.bleach_options))

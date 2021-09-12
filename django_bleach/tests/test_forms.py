@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
+from django.utils.safestring import SafeString
 from mock import patch
 
+from django_bleach.forms import BleachField
 from testproject.forms import BleachForm
 
 
@@ -15,6 +17,11 @@ class TestBleachField(TestCase):
         self.assertEqual(form.fields['no_tags'].to_python(''), '')
         self.assertEqual(form.fields['no_tags'].to_python([]), [])
         self.assertEqual(form.fields['no_tags'].to_python({}), {})
+
+    def test_return_type(self):
+        """ Test bleached values are SafeString objects """
+        field = BleachField()
+        self.assertIsInstance(field.to_python("some text"), SafeString)
 
     def test_bleaching(self):
         """ Test values are bleached """
