@@ -63,3 +63,29 @@ class TestModelFormField(TestCase):
         Check for the required flag on fields
         """
         self.assertEqual(self.form_field.required, True)
+
+
+class CustomBleachedFormField(bleach_forms.BleachField):
+    ...
+
+
+class OverriddenBleachContentModelForm(forms.ModelForm):
+    class Meta:
+        model = BleachContent
+        fields = '__all__'
+        field_classes = {
+            "content": CustomBleachedFormField,
+        }
+
+
+class TestModelFormFieldOverrides(TestCase):
+
+    def setUp(self):
+        model_form = OverriddenBleachContentModelForm()
+        self.form_field = model_form.fields['content']
+
+    def test_formfield_type(self):
+        """
+        Check content's form field is instance of CustomBleachedFormField.
+        """
+        self.assertIsInstance(self.form_field, CustomBleachedFormField)
