@@ -3,6 +3,8 @@ from django import forms
 from django.test import TestCase, override_settings
 
 from django_bleach import forms as bleach_forms
+from testproject.forms import CustomBleachWidget
+from testproject.models import Person
 
 from .test_models import BleachContent
 
@@ -21,7 +23,6 @@ class TestModelFormField(TestCase):
         self.choice_form_field = model_form.fields['choice']
         self.blank_field_form_field = model_form.fields['blank_field']
         self.model_field = BleachContent()._meta.get_field('content')
-        self.default_widget_class = bleach_forms.get_default_widget()
 
     def test_formfield_type(self):
         """
@@ -29,12 +30,42 @@ class TestModelFormField(TestCase):
         """
         self.assertIsInstance(self.form_field, bleach_forms.BleachField)
 
-    @override_settings(BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget')
-    def test_custom_widget(self):
+    def test_default_widget_type(self):
         """
-        Check content form field's widget is instance of default widget
+        Widget class is Textarea when BLEACH_DEFAULT_WIDGET is not set.
         """
-        self.assertIsInstance(self.form_field.widget, self.default_widget_class)
+        form = forms.modelform_factory(Person, fields='__all__')()
+        self.assertIsInstance(
+            form.fields['biography'].widget, forms.Textarea,
+        )
+
+    @override_settings(
+        BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget'
+    )
+    def test_custom_widget_type(self):
+        """
+        Widget class matches BLEACH_DEFAULT_WIDGET setting.
+        """
+        form = forms.modelform_factory(Person, fields='__all__')()
+        self.assertIsInstance(
+            form.fields['biography'].widget, CustomBleachWidget
+        )
+
+    @override_settings(
+        BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget'
+    )
+    def test_widget_override(self):
+        """
+        Widget class matches widget class specified in overrides.
+        """
+        form = forms.modelform_factory(
+            Person,
+            fields='__all__',
+            widgets={"biography": CustomBleachWidget},
+        )()
+        self.assertIsInstance(
+            form.fields['biography'].widget, CustomBleachWidget
+        )
 
     def test_same_allowed_args(self):
         """
