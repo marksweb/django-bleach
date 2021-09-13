@@ -73,5 +73,5 @@ class BleachField(forms.CharField):
         Mark the return value as template safe.
         """
         if value in self.empty_values:
-            return value
+            return self.empty_value
         return mark_safe(bleach.clean(value, **self.bleach_options))
