@@ -34,6 +34,7 @@ class BleachField(models.TextField):
 
         # If field doesn't have any choices add kwargs expected by BleachField.
         if not self.choices:
+            kwargs.setdefault("widget", forms.get_default_widget())
             kwargs.update({
                 "max_length": self.max_length,
                 "allowed_tags": self.bleach_kwargs.get("tags"),
