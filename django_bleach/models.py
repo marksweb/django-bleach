@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.utils.safestring import mark_safe
 
 from bleach import clean
 
@@ -58,3 +59,10 @@ class BleachField(models.TextField):
             setattr(model_instance, self.attname, clean_value)
             return clean_value
         return data
+
+    def from_db_value(self, value, expression, connection):
+        if value is None:
+            return value
+        # Values are sanitised before saving, so any value returned from the DB
+        # is safe to render unescaped.
+        return mark_safe(value)

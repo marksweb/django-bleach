@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.test import TestCase
+from django.utils.safestring import SafeString
 
 from django_bleach.models import BleachField
 from testproject.constants import (
@@ -54,6 +55,14 @@ class TestBleachModelField(TestCase):
         for key, value in test_data.items():
             obj = BleachContent.objects.create(content=value)
             self.assertEqual(obj.content, expected_values[key])
+
+    def test_retrieved_values_are_template_safe(self):
+        obj = BleachContent.objects.create(content="some content")
+        obj.refresh_from_db()
+        self.assertIsInstance(obj.content, SafeString)
+        obj = BleachContent.objects.create(content="")
+        obj.refresh_from_db()
+        self.assertIsInstance(obj.content, SafeString)
 
 
 class BleachNullableContent(models.Model):
