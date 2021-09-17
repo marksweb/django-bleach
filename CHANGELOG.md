@@ -1,3 +1,12 @@
+Version 0.8.0
+=============
+###### 18-09-2021
+Thank you to [Mark Gregson](https://github.com/MrkGrgsn) for providing the changes in this release!
+*  Fix for [#28](https://github.com/marksweb/django-bleach/issues/28): Return ``empty_value`` for any empty input value
+*  Fix for [#27](https://github.com/marksweb/django-bleach/issues/27): Mark cleaned data as template safe
+*  Fix for [#25](https://github.com/marksweb/django-bleach/issues/25): Respect the ``form_class`` argument
+*  Fix custom widget tests [#34](https://github.com/marksweb/django-bleach/pulls/34)
+
 Version 0.7.2
 =============
 ###### 27-07-2021
