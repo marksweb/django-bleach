@@ -51,14 +51,11 @@ class BleachField(models.TextField):
 
     def pre_save(self, model_instance, add):
         data = getattr(model_instance, self.attname)
-        if data:
-            clean_value = clean(
-                data,
-                **self.bleach_kwargs
-            )
-            setattr(model_instance, self.attname, clean_value)
-            return clean_value
-        return data
+        if data is None:
+            return data
+        clean_value = clean(data, **self.bleach_kwargs) if data else ""
+        setattr(model_instance, self.attname, mark_safe(clean_value))
+        return clean_value
 
     def from_db_value(self, value, expression, connection):
         if value is None:

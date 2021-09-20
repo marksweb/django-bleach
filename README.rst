@@ -111,9 +111,8 @@ accepts all of the normal field attributes. Behind the scenes, it is a
 ``TextField``, and accepts all the same arguments as the default ``TextField`` does.
 
 The ``BleachField`` model field sanitises its value before it is saved to the
-database. When the model is retrieved from the database, field values are
-automatically marked safe so they can be rendered in a template without further
-intervention.
+database and is marked safe so it can be immediately rendered in a template
+without further intervention.
 
 In model forms, ``BleachField`` model field are represented with the
 ``BleachField`` form field by default.

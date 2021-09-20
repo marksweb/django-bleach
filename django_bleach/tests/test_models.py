@@ -64,6 +64,14 @@ class TestBleachModelField(TestCase):
         obj.refresh_from_db()
         self.assertIsInstance(obj.content, SafeString)
 
+    def test_saved_values_are_template_safe(self):
+        obj = BleachContent(content="some content")
+        obj.save()
+        self.assertIsInstance(obj.content, SafeString)
+        obj = BleachContent(content="")
+        obj.save()
+        self.assertIsInstance(obj.content, SafeString)
+
 
 class BleachNullableContent(models.Model):
     """ Bleach test model"""
