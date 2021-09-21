@@ -110,19 +110,19 @@ In addition to the ``bleach``-specific arguments, the ``BleachField`` model fiel
 accepts all of the normal field attributes. Behind the scenes, it is a
 ``TextField``, and accepts all the same arguments as the default ``TextField`` does.
 
-The ``BleachField`` model field makes use of the ``BleachField`` form field to do
-all of the work. It provides no sanitisation facilities itself. This is
-considered a bug, but a clean solution has not yet been implemented. Any pull
-requests fixing this will be gratefully applied. As long as the ``BleachField``
-model field is only used with ``BleachField`` form fields, there will be no
-problem. If this is not the case, sanitised HTML can not be guaranteed.
+The ``BleachField`` model field sanitises its value before it is saved to the
+database and is marked safe so it can be immediately rendered in a template
+without further intervention.
+
+In model forms, ``BleachField`` model field are represented with the
+``BleachField`` form field by default.
 
 In your forms
 *************
 
 A ``BleachField`` form field is provided. This field sanitises HTML input from
-the user, and presents safe, clean HTML to your Django application. This is
-where most of the work is done.
+the user, and presents safe, clean HTML to your Django application and the
+returned value is marked safe for immediate rendering.
 
 In your templates
 *****************
