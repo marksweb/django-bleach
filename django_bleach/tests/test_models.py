@@ -26,6 +26,7 @@ class BleachContent(models.Model):
     )
     choice = BleachField(choices=CHOICES)
     blank_field = BleachField(blank=True)
+    null_field = BleachField(blank=True, null=True)
 
 
 class TestBleachModelField(TestCase):
@@ -71,6 +72,11 @@ class TestBleachModelField(TestCase):
         obj = BleachContent(content="")
         obj.save()
         self.assertIsInstance(obj.content, SafeString)
+
+    def test_saved_none_values_are_none(self):
+        obj = BleachContent(null_field=None)
+        obj.save()
+        self.assertIsNone(obj.null_field)
 
 
 class BleachNullableContent(models.Model):
