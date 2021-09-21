@@ -39,9 +39,12 @@ In addition to the bleach-specific arguments, the ``BleachField`` model field
 accepts all of the normal field attributes. Behind the scenes, it is a
 ``TextField``, and accepts all the same arguments as ``TextField``.
 
-The field does not specify any formfield to use, and falls back on the default
-``CharField`` and ``Textarea`` used by ``TextFields``. You must override the
-form field or widget yourself if you need something different.
+The ``BleachField`` model field sanitises its value before it is saved to the
+database and is marked safe so it can be immediately rendered in a template
+without further intervention.
+
+In model forms, ``BleachField`` model field are represented with the
+``BleachField`` form field by default.
 
 .. _forms:
 
@@ -49,12 +52,14 @@ In your forms
 =============
 
 A ``BleachField`` form field is provided. This field sanitises HTML input from
-the user, and presents safe, clean HTML to your Django application. This is
-where most of the work is done. Usually you will want to use a ``BleachField``
-model field, as opposed to the form field, but if you want, you can just use
-the form field. One possible use case for this set up is to force user input to
-be bleached, but allow administrators to add any content they like via another
-form (e.g. the admin site)::
+the user, and presents safe, clean HTML to your Django application and the
+returned value is marked safe for immediate rendering.
+
+Usually you will want to use a ``BleachField`` model field, as opposed to the
+form field, but if you want, you can just use the form field. One possible use
+case for this set up is to force user input to be bleached, but allow
+administrators to add any content they like via another form (e.g. the admin
+site)::
 
     # in app/forms.py
 
