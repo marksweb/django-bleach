@@ -1,12 +1,19 @@
 django-bleach - Bleach and sanitise user HTML
 =============================================
 
-.. image:: https://travis-ci.org/marksweb/django-bleach.svg?branch=master
-   :target: https://travis-ci.org/marksweb/django-bleach
+.. image:: https://readthedocs.org/projects/django-bleach/badge/?version=latest
+   :target: https://django-bleach.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
 .. image:: http://img.shields.io/pypi/v/django-bleach.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: Latest Version
+
+.. image:: http://img.shields.io/pypi/l/django-bleach.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-bleach/
+    :alt: License
+
+|
 
 .. image:: https://codecov.io/gh/marksweb/django-bleach/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/marksweb/django-bleach
@@ -19,14 +26,14 @@ django-bleach - Bleach and sanitise user HTML
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: Downloads
 
-.. image:: http://img.shields.io/pypi/l/django-bleach.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/django-bleach/
-    :alt: License
+|
 
 Bleach_ is a Python module that takes any HTML input, and returns
 valid, sanitised HTML that contains only an allowed subset of HTML tags,
 attributes and styles. ``django-bleach`` is a Django app that makes using
 ``bleach`` extremely easy.
+
+`Read the documentation here`_.
 
 Setup
 -----
@@ -152,6 +159,7 @@ addresses in text that may be an HTML fragment to links, while preserving:
 
 
 .. _bleach: https://github.com/mozilla/bleach
+.. _Read the documentation here: https://django-bleach.readthedocs.io/
 .. _bleach documentation: https://bleach.readthedocs.io/en/latest/clean.html 
 .. _django-ckeditor: https://github.com/shaunsephton/django-ckeditor
 .. _linkify: https://bleach.readthedocs.io/en/latest/linkify.html?highlight=linkify#bleach.linkify "linkify"
