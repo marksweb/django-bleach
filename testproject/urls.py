@@ -1,11 +1,8 @@
-try:
-    from django.conf.urls import url
-except ImportError:
-    from django.conf.urls.defaults import url
+from django.urls import path
 
-from .views import (home, model_form)
+from .views import home, model_form
 
 urlpatterns = [
-    url('^$', home, name='home'),
-    url('^model_form$', model_form, name='model_form'),
+    path('', home, name='home'),
+    path('model_form/', model_form, name='model_form'),
 ]

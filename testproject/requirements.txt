@@ -4,6 +4,10 @@
 #
 #    pip-compile
 #
+--trusted-host pypi.python.org
+--trusted-host pypi.org
+--trusted-host files.pythonhosted.org
+
 alabaster==0.7.12
     # via sphinx
 asgiref==3.4.1
