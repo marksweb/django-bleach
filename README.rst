@@ -42,7 +42,9 @@ Setup
 
     pip install django-bleach
 
-2. Add ``django-bleach`` to your ``INSTALLED_APPS``::
+2. Add ``django-bleach`` to your ``INSTALLED_APPS``:
+   
+   .. code-block:: python
 
         INSTALLED_APPS = [
             # ...
@@ -53,7 +55,9 @@ Setup
 3. Select some sensible defaults for the allowed tags, attributes and styles;
    and the behaviour when unknown tags are encountered. Each of these are
    optional, and default to using the ``bleach`` defaults. See the
-   `bleach documentation`_::
+   `bleach documentation`_:
+   
+   .. code-block:: python
 
         # Which HTML tags are allowed
         BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a']
@@ -75,10 +79,12 @@ Setup
 
 4. Select the default widget for bleach fields. This defaults to
    ``django.forms.Textarea``, but you will probably want to replace it with a
-   WYSIWYG editor, or something similar::
+   WYSIWYG editor, or something similar:
+   
+   .. code-block:: python
 
         # Use the CKEditorWidget for bleached HTML fields
-           BLEACH_DEFAULT_WIDGET = 'wysiwyg.widgets.WysiwygWidget'
+        BLEACH_DEFAULT_WIDGET = 'wysiwyg.widgets.WysiwygWidget'
 
    I use `django-ckeditor`_ in my projects, but what you use is up to you.
 
@@ -90,7 +96,9 @@ In your models
 
 ``django-bleach`` provides three ways of creating bleached output. The simplest
 way of including user-editable HTML content that is automatically sanitised is
-by using the ``BleachField`` model field::
+by using the ``BleachField`` model field:
+
+.. code-block:: python
 
     # in app/models.py
 
@@ -135,7 +143,9 @@ In your templates
 *****************
 
 If you have a piece of content from somewhere that needs to be printed in a
-template, you can use the ``bleach`` filter::
+template, you can use the ``bleach`` filter:
+
+.. code-block:: django
 
     {% load bleach_tags %}
 
@@ -143,7 +153,9 @@ template, you can use the ``bleach`` filter::
 
 If filter has no arguments it uses default settings defined in your
 application settings. You can override allowed tags by specifying them
-as a parameter to the filter::
+as a parameter to the filter:
+
+.. code-block:: django
 
     {{ some_unsafe_content|bleach:"p,span" }}
 
