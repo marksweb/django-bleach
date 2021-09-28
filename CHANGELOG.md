@@ -1,3 +1,9 @@
+Version 0.9.0
+=============
+###### 28-09-2021
+* Drop support for django <2.2
+* Added support for django 4.0
+
 Version 0.8.0
 =============
 ###### 18-09-2021

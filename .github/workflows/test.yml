@@ -11,9 +11,7 @@ jobs:
         python-version: [ 3.6, 3.7, 3.8, 3.9, ]
         django-version: [
             '2.2',
-            '3.0',  # Strings because otherwise 3.0 becomes 3
-            '3.1',
-            '3.2'
+            '3.2',
         ]
         os: [
           ubuntu-20.04,
@@ -37,3 +35,28 @@ jobs:
 
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v1
+
+  pre-release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [
+          ubuntu-20.04,
+        ]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --pre django bleach coverage mock
+        python setup.py install
+    - name: Run tests
+      run: |
+        cd testproject
+        python manage.py test django_bleach
