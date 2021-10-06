@@ -1,3 +1,16 @@
+Change Log
+==========
+
+This document records all notable changes to [django-bleach](https://github.com/marksweb/django-bleach).
+This project adheres to [Semantic Versioning](https://semver.org/).
+
+[unreleased](https://github.com/marksweb/django-bleach/compare/0.9.0...master) changes
+-------------------------------------------------------------------------------------
+
+* pre-commit hooks
+* python 3.10 support
+* docs syntax highlighting [#38](https://github.com/marksweb/django-bleach/pull/38)
+
 Version 0.9.0
 =============
 ###### 28-09-2021
