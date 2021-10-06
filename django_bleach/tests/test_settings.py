@@ -1,16 +1,12 @@
-# -*- coding: utf-8 -*-
 from django.core.exceptions import ImproperlyConfigured
 from django.forms import Textarea
 from django.test import TestCase, override_settings
-from mock import patch
+
+from unittest.mock import patch
 
 from django_bleach.forms import get_default_widget
 from django_bleach.utils import get_bleach_default_options
-
-from testproject.constants import (
-    ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS,
-    ALLOWED_STYLES, ALLOWED_TAGS,
-)
+from testproject.constants import ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS, ALLOWED_STYLES, ALLOWED_TAGS
 from testproject.forms import CustomBleachWidget
 
 

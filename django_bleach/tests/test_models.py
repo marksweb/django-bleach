@@ -1,13 +1,9 @@
-# -*- coding: utf-8 -*-
 from django.db import models
 from django.test import TestCase
 from django.utils.safestring import SafeString
 
 from django_bleach.models import BleachField
-from testproject.constants import (
-    ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS,
-    ALLOWED_STYLES, ALLOWED_TAGS
-)
+from testproject.constants import ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS, ALLOWED_STYLES, ALLOWED_TAGS
 
 
 class BleachContent(models.Model):

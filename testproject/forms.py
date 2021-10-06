@@ -1,13 +1,8 @@
 from django import forms
 
 from django_bleach.forms import BleachField
+from testproject.constants import ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS, ALLOWED_STYLES, ALLOWED_TAGS
 from testproject.models import Person
-from testproject.constants import (
-    ALLOWED_ATTRIBUTES,
-    ALLOWED_PROTOCOLS,
-    ALLOWED_STYLES,
-    ALLOWED_TAGS
-)
 
 
 class CustomBleachWidget(forms.Textarea):

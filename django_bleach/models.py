@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.safestring import mark_safe
 
@@ -13,7 +12,7 @@ class BleachField(models.TextField):
                  allowed_styles=None, allowed_protocols=None,
                  strip_tags=None, strip_comments=None, *args, **kwargs):
 
-        super(BleachField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.bleach_kwargs = get_bleach_default_options()
 
@@ -47,7 +46,7 @@ class BleachField(models.TextField):
                 "required": not self.blank,
             })
 
-        return super(BleachField, self).formfield(form_class=form_class, **kwargs)
+        return super().formfield(form_class=form_class, **kwargs)
 
     def pre_save(self, model_instance, add):
         data = getattr(model_instance, self.attname)

@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from django.test import TestCase
 from django.template import Context, Template
+from django.test import TestCase
 
 
 class TestBleachTemplates(TestCase):

@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-import bleach
-
 from django import forms
-from django.core.exceptions import ImproperlyConfigured
-
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.safestring import mark_safe
+
+import bleach
 from importlib import import_module
 
 from django_bleach.utils import get_bleach_default_options
@@ -25,7 +23,7 @@ def load_widget(path):
         cls = getattr(mod, attr)
     except AttributeError:
         raise ImproperlyConfigured(
-            "Module '%s' does not define a '%s' widget" % (module, attr)
+            f"Module '{module}' does not define a '{attr}' widget"
         )
 
     return cls
@@ -49,7 +47,7 @@ class BleachField(forms.CharField):
 
         self.widget = get_default_widget()
 
-        super(BleachField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.bleach_options = get_bleach_default_options()
 

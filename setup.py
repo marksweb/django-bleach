@@ -3,9 +3,10 @@ import codecs
 import os
 import re
 import sys
-
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 from setuptools.command.test import test as test_command
+
+
 try:
     from sphinx.setup_command import BuildDoc
 except ImportError:
@@ -26,8 +27,8 @@ class Tox(test_command):
 
     def run_tests(self):
         # import here, cause outside the eggs aren't loaded
-        import tox
         import shlex
+        import tox
         args = self.tox_args
         if args:
             args = shlex.split(self.tox_args)
@@ -43,7 +44,7 @@ def read(*parts):
 def find_variable(variable, *parts):
     version_file = read(*parts)
     version_match = re.search(
-        r"^{0} = ['\"]([^'\"]*)['\"]".format(variable), version_file, re.M
+        fr"^{variable} = ['\"]([^'\"]*)['\"]", version_file, re.M
     )
     if version_match:
         return str(version_match.group(1))
@@ -64,7 +65,7 @@ if sys.argv[-1] == 'release':
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")
-    os.system("git tag -a %s -m 'version %s'" % (version, version))
+    os.system(f"git tag -a {version} -m 'version {version}'")
     os.system("git push --tags")
     sys.exit()
 

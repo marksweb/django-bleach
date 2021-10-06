@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-import bleach
-
 from django import template
 from django.utils.safestring import mark_safe
 
+import bleach
+
 from django_bleach.utils import get_bleach_default_options
+
 
 register = template.Library()
 

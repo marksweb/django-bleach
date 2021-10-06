@@ -22,6 +22,10 @@ django-bleach - Bleach and sanitise user HTML
    :alt: Codacy Badge
    :target: https://app.codacy.com/app/marksweb/django-bleach?utm_source=github.com&utm_medium=referral&utm_content=marksweb/django-bleach&utm_campaign=Badge_Grade_Dashboard
 
+.. image:: https://results.pre-commit.ci/badge/github/marksweb/django-bleach/master.svg
+   :target: https://results.pre-commit.ci/latest/github/marksweb/django-bleach/master
+   :alt: pre-commit.ci status
+
 .. image:: http://img.shields.io/pypi/dm/django-bleach.svg?style=flat-square
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: Downloads
@@ -43,7 +47,7 @@ Setup
     pip install django-bleach
 
 2. Add ``django-bleach`` to your ``INSTALLED_APPS``:
-   
+
    .. code-block:: python
 
         INSTALLED_APPS = [
@@ -56,7 +60,7 @@ Setup
    and the behaviour when unknown tags are encountered. Each of these are
    optional, and default to using the ``bleach`` defaults. See the
    `bleach documentation`_:
-   
+
    .. code-block:: python
 
         # Which HTML tags are allowed
@@ -80,7 +84,7 @@ Setup
 4. Select the default widget for bleach fields. This defaults to
    ``django.forms.Textarea``, but you will probably want to replace it with a
    WYSIWYG editor, or something similar:
-   
+
    .. code-block:: python
 
         # Use the CKEditorWidget for bleached HTML fields
@@ -172,6 +176,6 @@ addresses in text that may be an HTML fragment to links, while preserving:
 
 .. _bleach: https://github.com/mozilla/bleach
 .. _Read the documentation here: https://django-bleach.readthedocs.io/
-.. _bleach documentation: https://bleach.readthedocs.io/en/latest/clean.html 
+.. _bleach documentation: https://bleach.readthedocs.io/en/latest/clean.html
 .. _django-ckeditor: https://github.com/shaunsephton/django-ckeditor
 .. _linkify: https://bleach.readthedocs.io/en/latest/linkify.html?highlight=linkify#bleach.linkify "linkify"
