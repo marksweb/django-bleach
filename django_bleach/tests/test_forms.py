@@ -4,12 +4,7 @@ from django.test import TestCase, override_settings
 from django.utils.safestring import SafeString
 
 from django_bleach.forms import BleachField
-from testproject.constants import (
-    ALLOWED_ATTRIBUTES,
-    ALLOWED_PROTOCOLS,
-    ALLOWED_STYLES,
-    ALLOWED_TAGS
-)
+from testproject.constants import ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS, ALLOWED_STYLES, ALLOWED_TAGS
 from testproject.forms import BleachForm, CustomBleachWidget
 
 

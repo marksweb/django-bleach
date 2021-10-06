@@ -2,6 +2,7 @@
 import os
 import sys
 
+
 SITE_ID = 1
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))

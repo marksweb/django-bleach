@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-import bleach
-
 from django import forms
-from django.core.exceptions import ImproperlyConfigured
-
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.safestring import mark_safe
+
+import bleach
 from importlib import import_module
 
 from django_bleach.utils import get_bleach_default_options

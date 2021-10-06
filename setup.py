@@ -3,9 +3,10 @@ import codecs
 import os
 import re
 import sys
-
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 from setuptools.command.test import test as test_command
+
+
 try:
     from sphinx.setup_command import BuildDoc
 except ImportError:
@@ -26,8 +27,8 @@ class Tox(test_command):
 
     def run_tests(self):
         # import here, cause outside the eggs aren't loaded
-        import tox
         import shlex
+        import tox
         args = self.tox_args
         if args:
             args = shlex.split(self.tox_args)
