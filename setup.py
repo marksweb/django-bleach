@@ -44,7 +44,7 @@ def read(*parts):
 def find_variable(variable, *parts):
     version_file = read(*parts)
     version_match = re.search(
-        r"^{0} = ['\"]([^'\"]*)['\"]".format(variable), version_file, re.M
+        fr"^{variable} = ['\"]([^'\"]*)['\"]", version_file, re.M
     )
     if version_match:
         return str(version_match.group(1))
@@ -65,7 +65,7 @@ if sys.argv[-1] == 'release':
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")
-    os.system("git tag -a %s -m 'version %s'" % (version, version))
+    os.system(f"git tag -a {version} -m 'version {version}'")
     os.system("git push --tags")
     sys.exit()
 

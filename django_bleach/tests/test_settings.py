@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-from mock import patch
-
 from django.core.exceptions import ImproperlyConfigured
 from django.forms import Textarea
 from django.test import TestCase, override_settings
+
+from unittest.mock import patch
 
 from django_bleach.forms import get_default_widget
 from django_bleach.utils import get_bleach_default_options

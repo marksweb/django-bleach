@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # django-bleach documentation build configuration file, created by
 # sphinx-quickstart on Tue Jun 19 10:24:12 2012.

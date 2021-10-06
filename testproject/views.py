@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from django.db import OperationalError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
