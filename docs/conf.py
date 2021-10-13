@@ -10,6 +10,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import datetime
+
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -23,7 +25,12 @@
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinxcontrib.spelling',
+]
+
+spelling_lang = 'en_GB'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -37,9 +44,10 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'index'
 
+current_year = datetime.datetime.now().year
 # General information about the project.
 project = 'django-bleach'
-copyright = '2019, Tim Heap, Mark Walker'
+copyright = f'{current_year}, Tim Heap, Mark Walker'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
