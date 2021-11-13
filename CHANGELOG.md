@@ -4,9 +4,14 @@ Change Log
 This document records all notable changes to [django-bleach](https://github.com/marksweb/django-bleach).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-[unreleased](https://github.com/marksweb/django-bleach/compare/0.9.0...master) changes
+[unreleased](https://github.com/marksweb/django-bleach/compare/1.0.0...master) changes
 -------------------------------------------------------------------------------------
 
+Version 1.0.0
+=============
+###### 13-11-2021
+Going to 1.0 is long overdue, especially considering SemVer.
+* automated pypi releases via github actions
 * pre-commit hooks
 * python 3.10 support
 * docs syntax highlighting [#38](https://github.com/marksweb/django-bleach/pull/38)
