@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 * Added support for bleach's `css_sanitizer` kwarg
 * Add isort and codespell to ci
 * Dropped support for python 3.6 and 3.7 as well as django 3.0 and 3.1
-* Renamed default branch from `master` to `main`. To update your local:
+* Renamed default branch from `master` to `main`. If you have the project locally, you can update using:
 
 ```shell
 git branch -m master main

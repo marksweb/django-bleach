@@ -57,7 +57,7 @@ version = release.rstrip('.')
 
 setup(
     name=name,
-    version=version,
+    version="1.0.0",
     description='Easily use bleach with Django models and templates',
     long_description=read('README.rst'),
     long_description_content_type='text/x-rst',
@@ -71,6 +71,7 @@ setup(
         'bleach[css]>=5,<6',
         'Django>=1.11',
     ],
+    python_requires='>=3.8',
     tests_require=[
         'bleach[css]>=5,<6',
         'mock',
@@ -105,4 +106,10 @@ setup(
         'Framework :: Django :: 4.0',
         'Development Status :: 5 - Production/Stable',
     ],
+    project_urls={
+        'Documentation': 'https://django-bleach.readthedocs.io/',
+        'Release notes': 'https://github.com/marksweb/django-bleach/blob/main/CHANGELOG.md',
+        'Issues': 'https://github.com/marksweb/django-bleach/issues',
+        'Source': 'https://github.com/marksweb/django-bleach',
+    }
 )
