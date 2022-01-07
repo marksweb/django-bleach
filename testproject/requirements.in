@@ -6,7 +6,6 @@ flake8
 flake8-broken-line
 flake8-bugbear
 flake8-builtins
-flake8-coding
 flake8-commas
 flake8-comprehensions
 flake8-eradicate
