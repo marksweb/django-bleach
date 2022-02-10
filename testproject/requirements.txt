@@ -4,10 +4,6 @@
 #
 #    pip-compile
 #
---trusted-host pypi.python.org
---trusted-host pypi.org
---trusted-host files.pythonhosted.org
-
 alabaster==0.7.12
     # via sphinx
 asgiref==3.4.1
@@ -28,7 +24,7 @@ click==8.0.3
     # via pip-tools
 coverage==6.2
     # via -r requirements.in
-django==4.0.1
+django==4.0.2
     # via -r requirements.in
 docutils==0.17.1
     # via
