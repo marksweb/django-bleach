@@ -55,7 +55,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install --pre django bleach coverage mock
+        pip install --pre django bleach<5 coverage mock
         python setup.py install
     - name: Run tests
       run: |
