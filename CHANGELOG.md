@@ -4,8 +4,14 @@ Change Log
 This document records all notable changes to [django-bleach](https://github.com/marksweb/django-bleach).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-[unreleased](https://github.com/marksweb/django-bleach/compare/1.0.0...master) changes
+[unreleased](https://github.com/marksweb/django-bleach/compare/1.0.1...master) changes
 -------------------------------------------------------------------------------------
+
+Version 1.0.1
+=============
+###### 08-04-2022
+
+* cap bleach version at ``<5`` [#51](https://github.com/marksweb/django-bleach/issues/51)
 
 Version 1.0.0
 =============

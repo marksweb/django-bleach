@@ -60,6 +60,7 @@ setup(
     version=version,
     description='Easily use bleach with Django models and templates',
     long_description=read('README.rst'),
+    long_description_content_type='text/x-rst',
     author='Tim Heap',
     maintainer='Mark Walker',
     maintainer_email='theshow+django-bleach@gmail.com',
@@ -67,7 +68,7 @@ setup(
     license='MIT',
     packages=find_packages(exclude=('testproject*',)),
     install_requires=[
-        'bleach>=1.5.0',
+        'bleach>=1.5.0,<5',
         'Django>=1.11',
     ],
     tests_require=[
