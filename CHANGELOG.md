@@ -7,11 +7,14 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 [unreleased](https://github.com/marksweb/django-bleach/compare/1.0.1...master) changes
 -------------------------------------------------------------------------------------
 
-Version 1.0.1
+Version 2.0.0
 =============
 ###### 08-04-2022
 
 * cap bleach version at ``<5`` [#51](https://github.com/marksweb/django-bleach/issues/51)
+* drop support for python 3.6
+* drop support for django 3.0 and 3.1
+* added support for django 4
 
 Version 1.0.0
 =============
