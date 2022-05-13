@@ -97,7 +97,7 @@ class TestBleachField(TestCase):
         }
         form = BleachForm(data=test_data)
         form.is_valid()
-        self.assertEqual(form.cleaned_data['no_tags'], 'onetwo')
+        self.assertEqual(form.cleaned_data['no_tags'], '\none\ntwo')
 
         self.assertEqual(
             form.cleaned_data['bleach_strip'],
