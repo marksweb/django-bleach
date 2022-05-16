@@ -14,7 +14,7 @@ attrs==21.4.0
     #   flake8-eradicate
 babel==2.9.1
     # via sphinx
-bleach==4.1.0
+bleach==5.0.0
     # via -r requirements.in
 certifi==2021.10.8
     # via requests

@@ -68,11 +68,11 @@ setup(
     license='MIT',
     packages=find_packages(exclude=('testproject*',)),
     install_requires=[
-        'bleach[css]>=5.0.0',
+        'bleach[css]>=5,<6',
         'Django>=1.11',
     ],
     tests_require=[
-        'bleach>=5.0.0',
+        'bleach[css]>=5,<6',
         'mock',
         'sphinx',
         'tox'
