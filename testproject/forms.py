@@ -1,7 +1,15 @@
 from django import forms
 
+from bleach.css_sanitizer import CSSSanitizer
+
 from django_bleach.forms import BleachField
-from testproject.constants import ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS, ALLOWED_STYLES, ALLOWED_TAGS
+from testproject.constants import (
+    ALLOWED_ATTRIBUTES,
+    ALLOWED_CSS_PROPERTIES,
+    ALLOWED_PROTOCOLS,
+    ALLOWED_STYLES,
+    ALLOWED_TAGS,
+)
 from testproject.models import Person
 
 
@@ -46,6 +54,13 @@ class BleachForm(forms.Form):
         allowed_attributes=['style'],
         allowed_tags=ALLOWED_TAGS,
         allowed_styles=ALLOWED_STYLES
+    )
+    bleach_css_sanitizer = BleachField(
+        max_length=100,
+        strip_tags=False,
+        allowed_attributes=['style'],
+        allowed_tags=ALLOWED_TAGS,
+        css_sanitizer=CSSSanitizer(allowed_css_properties=ALLOWED_CSS_PROPERTIES)
     )
 
 

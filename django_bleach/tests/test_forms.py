@@ -2,8 +2,16 @@ from django import forms
 from django.test import TestCase, override_settings
 from django.utils.safestring import SafeString
 
+from bleach.css_sanitizer import CSSSanitizer
+
 from django_bleach.forms import BleachField
-from testproject.constants import ALLOWED_ATTRIBUTES, ALLOWED_PROTOCOLS, ALLOWED_STYLES, ALLOWED_TAGS
+from testproject.constants import (
+    ALLOWED_ATTRIBUTES,
+    ALLOWED_CSS_PROPERTIES,
+    ALLOWED_PROTOCOLS,
+    ALLOWED_STYLES,
+    ALLOWED_TAGS,
+)
 from testproject.forms import BleachForm, CustomBleachWidget
 
 
@@ -21,6 +29,22 @@ class TestBleachField(TestCase):
         field = BleachField()
         self.assertIsInstance(field.to_python("some text"), SafeString)
 
+    def test_deprecation_allowed_styles(self):
+        with self.assertWarns(DeprecationWarning):
+            BleachField(allowed_styles=ALLOWED_STYLES)
+
+    def test_prefer_css_sanitizer_over_allowed_styles(self):
+        with self.assertWarnsMessage(
+            UserWarning,
+            "allowed_styles argument is ignored since css_sanitizer is favoured over allowed_styles"
+        ):
+            field = BleachField(
+                allowed_styles=['color', 'text-align'],
+                css_sanitizer=CSSSanitizer(allowed_css_properties=ALLOWED_CSS_PROPERTIES)
+            )
+            self.assertIsInstance(field.bleach_options["css_sanitizer"], CSSSanitizer)
+            self.assertEqual(field.bleach_options["css_sanitizer"].allowed_css_properties, ALLOWED_CSS_PROPERTIES)
+
     def test_bleaching(self):
         """ Test values are bleached """
         test_data = {
@@ -30,7 +54,7 @@ class TestBleachField(TestCase):
                             "<script>alert(\"Hello World\")</script>",
             'bleach_attrs': "<a href=\"https://www.google.com\" "
                             "target=\"_blank\">google.com</a>",
-            'bleach_styles': "<li style=\"color: white\">item</li>"
+            'bleach_css_sanitizer': "<li style=\"color: white\">item</li>",
         }
         form = BleachForm(data=test_data)
         form.is_valid()
@@ -50,8 +74,8 @@ class TestBleachField(TestCase):
             '<a href="https://www.google.com">google.com</a>'
         )
         self.assertNotEqual(
-            form.cleaned_data['bleach_styles'],
-            test_data['bleach_styles']
+            form.cleaned_data['bleach_css_sanitizer'],
+            test_data['bleach_css_sanitizer']
         )
 
     def test_tags(self):
@@ -62,7 +86,7 @@ class TestBleachField(TestCase):
             'bleach_strip': "<ul><li>one</li><li>two</li></ul>",
             'bleach_attrs': "<a href=\"https://www.google.com\" "
                             "title=\"Google\">google.com</a>",
-            'bleach_styles': "<li style=\"color: white;\">item</li>"
+            'bleach_css_sanitizer': "<li style=\"color: white;\">item</li>"
         }
         form = BleachForm(data=test_data)
         form.is_valid()
@@ -78,8 +102,8 @@ class TestBleachField(TestCase):
             test_data['bleach_attrs']
         )
         self.assertEqual(
-            form.cleaned_data['bleach_styles'],
-            test_data['bleach_styles']
+            form.cleaned_data['bleach_css_sanitizer'],
+            test_data['bleach_css_sanitizer']
         )
 
     def test_attrs(self):
@@ -93,11 +117,11 @@ class TestBleachField(TestCase):
             'no_tags': list_html,
             'bleach_strip': list_html,
             'bleach_attrs': list_html,
-            'bleach_styles': list_html
+            'bleach_css_sanitizer': list_html
         }
         form = BleachForm(data=test_data)
         form.is_valid()
-        self.assertEqual(form.cleaned_data['no_tags'], 'onetwo')
+        self.assertEqual(form.cleaned_data['no_tags'], '\none\ntwo')
 
         self.assertEqual(
             form.cleaned_data['bleach_strip'],
@@ -108,7 +132,7 @@ class TestBleachField(TestCase):
             test_data['bleach_strip']
         )
         self.assertEqual(
-            form.cleaned_data['bleach_styles'],
+            form.cleaned_data['bleach_css_sanitizer'],
             '<ul><li>one</li><li>two</li></ul>'
         )
 
@@ -150,6 +174,13 @@ class TestCustomWidget(TestCase):
                 allowed_tags=ALLOWED_TAGS,
                 allowed_styles=ALLOWED_STYLES
             )
+            bleach_css_sanitizer = BleachField(
+                max_length=100,
+                strip_tags=False,
+                allowed_attributes=['style'],
+                allowed_tags=ALLOWED_TAGS,
+                css_sanitizer=CSSSanitizer(allowed_css_properties=ALLOWED_CSS_PROPERTIES)
+            )
         self.CustomForm = CustomForm
 
     def test_custom_widget_type(self):
@@ -172,7 +203,8 @@ class TestCustomWidget(TestCase):
                 'target="_blank">google.com</a>'
                 '<a href="https://www.google.com">google.com</a>'
             ),
-            'bleach_styles': '<li style="color: white">item</li>'
+            'bleach_styles': '<li style="color: white">item</li>',
+            'bleach_css_sanitizer': '<li style="color: white">item</li>'
         }
         form = self.CustomForm(data=test_data)
         form.is_valid()
@@ -194,4 +226,8 @@ class TestCustomWidget(TestCase):
         self.assertNotEqual(
             form.cleaned_data['bleach_styles'],
             test_data['bleach_styles']
+        )
+        self.assertNotEqual(
+            form.cleaned_data['bleach_css_sanitizer'],
+            test_data['bleach_css_sanitizer']
         )

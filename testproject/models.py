@@ -1,5 +1,7 @@
 from django.db import models
 
+from bleach.css_sanitizer import CSSSanitizer
+
 from django_bleach.models import BleachField
 
 
@@ -11,5 +13,5 @@ class Person(models.Model):
         allowed_tags=['p', 'a', 'li', 'ul', 'strong'],
         allowed_attributes=['class', 'href', 'style'],
         allowed_protocols=['http', 'https'],
-        allowed_styles=['color', 'background-color']
+        css_sanitizer=CSSSanitizer(allowed_css_properties=['color', 'background-color'])
     )

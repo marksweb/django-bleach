@@ -4,6 +4,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.safestring import mark_safe
 
 import bleach
+import warnings
+from bleach.css_sanitizer import CSSSanitizer
 from importlib import import_module
 
 from django_bleach.utils import get_bleach_default_options
@@ -43,7 +45,7 @@ class BleachField(forms.CharField):
 
     def __init__(self, allowed_tags=None, allowed_attributes=None,
                  allowed_styles=None, allowed_protocols=None,
-                 strip_comments=None, strip_tags=None, *args, **kwargs):
+                 strip_comments=None, strip_tags=None, css_sanitizer=None, *args, **kwargs):
 
         self.widget = get_default_widget()
 
@@ -56,7 +58,16 @@ class BleachField(forms.CharField):
         if allowed_attributes is not None:
             self.bleach_options["attributes"] = allowed_attributes
         if allowed_styles is not None:
-            self.bleach_options["styles"] = allowed_styles
+            warnings.warn(
+                "allowed_styles will be deprecated, use css_sanitizer instead",
+                DeprecationWarning
+            )
+
+            if css_sanitizer:
+                warnings.warn("allowed_styles argument is ignored since css_sanitizer is favoured over allowed_styles")
+            self.bleach_options["css_sanitizer"] = CSSSanitizer(allowed_css_properties=allowed_styles)
+        if css_sanitizer is not None:
+            self.bleach_options["css_sanitizer"] = css_sanitizer
         if allowed_protocols is not None:
             self.bleach_options["protocols"] = allowed_protocols
         if strip_tags is not None:

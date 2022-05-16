@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 
+import warnings
 from bleach import clean
+from bleach.css_sanitizer import CSSSanitizer
 
 from . import forms
 from .utils import get_bleach_default_options
@@ -10,7 +12,7 @@ from .utils import get_bleach_default_options
 class BleachField(models.TextField):
     def __init__(self, allowed_tags=None, allowed_attributes=None,
                  allowed_styles=None, allowed_protocols=None,
-                 strip_tags=None, strip_comments=None, *args, **kwargs):
+                 strip_tags=None, strip_comments=None, css_sanitizer=None, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
 
@@ -21,7 +23,15 @@ class BleachField(models.TextField):
         if allowed_attributes:
             self.bleach_kwargs["attributes"] = allowed_attributes
         if allowed_styles:
-            self.bleach_kwargs["styles"] = allowed_styles
+            warnings.warn(
+                "allowed_styles will be deprecated, use css_sanitizer instead",
+                DeprecationWarning
+            )
+            if css_sanitizer:
+                warnings.warn("allowed_styles argument is ignored since css_sanitizer is favoured over allowed_styles")
+            self.bleach_kwargs["css_sanitizer"] = CSSSanitizer(allowed_css_properties=allowed_styles)
+        if css_sanitizer:
+            self.bleach_kwargs["css_sanitizer"] = css_sanitizer
         if allowed_protocols:
             self.bleach_kwargs["protocols"] = allowed_protocols
         if strip_tags:
@@ -39,7 +49,7 @@ class BleachField(models.TextField):
                 "max_length": self.max_length,
                 "allowed_tags": self.bleach_kwargs.get("tags"),
                 "allowed_attributes": self.bleach_kwargs.get("attributes"),
-                "allowed_styles": self.bleach_kwargs.get("styles"),
+                "css_sanitizer": self.bleach_kwargs.get("css_sanitizer"),
                 "allowed_protocols": self.bleach_kwargs.get("protocols"),
                 "strip_tags": self.bleach_kwargs.get("strip"),
                 "strip_comments": self.bleach_kwargs.get("strip_comments"),
