@@ -39,14 +39,18 @@ completely optional::
 
 You can override each of these for individual ``BleachField`` form and model
 fields if you need to. Simply pass in one of the following settings you want to
-override as a named parameter to the ``BleachField``::
+override as a named parameter to the ``BleachField``:
 
 * ``allowed_tags``
 * ``allowed_attributes``
-* ``allowed_styles``
 * ``allowed_protocols``
 * ``strip_tags``
 * ``strip_comments``
+* ``css_sanitizer``
+
+The following argument will be deprecated in the near future:
+
+* ``allowed_styles``
 
 An example, where blog posts should be allowed to contain images and headings::
 
