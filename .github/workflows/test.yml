@@ -35,11 +35,10 @@ jobs:
         python setup.py install
     - name: Run coverage
       run: |
-        cd testproject
-        coverage run --rcfile ../.coveragerc manage.py test --failfast django_bleach
+        coverage run --rcfile .coveragerc testproject/manage.py test --failfast django_bleach
 
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v2
 
   pre-release:
     runs-on: ${{ matrix.os }}
@@ -63,5 +62,4 @@ jobs:
         python setup.py install
     - name: Run tests
       run: |
-        cd testproject
-        python manage.py test django_bleach
+        python testproject/manage.py test django_bleach
