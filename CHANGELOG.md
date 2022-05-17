@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 [unreleased](https://github.com/marksweb/django-bleach/compare/1.0.1...master) changes
 -------------------------------------------------------------------------------------
 
+* Bleach dependency is now at ``>=5,<6`` [#55](https://github.com/marksweb/django-bleach/pull/55) (Thanks [Laityned](https://github.com/Laityned))
+* Deprecate bleach's `allowed_styles` kwarg
+* Added support for bleach's `css_sanitizer` kwarg
+* Add isort and codespell to ci
+
 Version 2.0.0
 =============
 ###### 08-04-2022

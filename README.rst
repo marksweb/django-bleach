@@ -121,9 +121,13 @@ by using the ``BleachField`` model field:
 
 * ``allowed_tags``
 * ``allowed_attributes``
-* ``allowed_styles``
 * ``strip_tags``
 * ``strip_comments``
+* ``css_sanitizer``
+
+The following argument will be deprecated in the near future:
+
+* ``allowed_styles``
 
 In addition to the ``bleach``-specific arguments, the ``BleachField`` model field
 accepts all of the normal field attributes. Behind the scenes, it is a
