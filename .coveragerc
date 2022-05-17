@@ -1,7 +1,7 @@
 [run]
 branch = True
-source =
-    django_bleach
+include =
+    django_bleach/*
 omit =
     .env/*
     */tests/*
@@ -9,6 +9,6 @@ omit =
 [report]
     precision = 1
 [html]
-    directory = ../htmlcov
+    directory = ./htmlcov
 [xml]
-    output = ../coverage.xml
+    output = ./coverage.xml
