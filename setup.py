@@ -57,7 +57,7 @@ version = release.rstrip('.')
 
 setup(
     name=name,
-    version="1.0.0",
+    version=version,
     description='Easily use bleach with Django models and templates',
     long_description=read('README.rst'),
     long_description_content_type='text/x-rst',
