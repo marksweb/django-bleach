@@ -48,7 +48,7 @@ copyright = "%d, Tim Heap, Mark Walker" % datetime.date.today().year
 # built documents.
 #
 # The short X.Y version.
-version = '1.0.0'
+version = '2.0.0'
 # The full version, including alpha/beta/rc tags.
 # release = '1.0.0'
 
