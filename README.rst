@@ -34,6 +34,10 @@ django-bleach - Bleach and sanitise user HTML
    :target: https://lgtm.com/projects/g/marksweb/django-bleach/context:python
    :alt: Language grade: Python
 
+.. image:: https://img.shields.io/lgtm/alerts/g/marksweb/django-bleach.svg?logo=lgtm&logoWidth=18
+   :target: https://lgtm.com/projects/g/marksweb/django-bleach/alerts/
+   :alt: Total alerts
+
 |
 
 Bleach_ is a Python module that takes any HTML input, and returns
