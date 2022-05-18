@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'django-bleach'
-copyright = "%d, Tim Heap, Mark Walker" % datetime.date.today().year
+copyright = f"{datetime.date.today().year}, Tim Heap, Mark Walker"
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
