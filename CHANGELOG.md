@@ -4,8 +4,12 @@ Change Log
 This document records all notable changes to [django-bleach](https://github.com/marksweb/django-bleach).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-[unreleased](https://github.com/marksweb/django-bleach/compare/2.0.0...master) changes
+[unreleased](https://github.com/marksweb/django-bleach/compare/3.0.0...master) changes
 -------------------------------------------------------------------------------------
+
+Version 3.0.0
+=============
+**19-05-2022**
 
 * Bleach dependency is now at ``>=5,<6`` [#55](https://github.com/marksweb/django-bleach/pull/55) (Thanks [Laityned](https://github.com/Laityned))
 * Deprecate bleach's `allowed_styles` kwarg
