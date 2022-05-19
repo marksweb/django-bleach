@@ -71,6 +71,7 @@ setup(
         'bleach[css]>=5,<6',
         'Django>=1.11',
     ],
+    python_requires='>=3.8',
     tests_require=[
         'bleach[css]>=5,<6',
         'mock',
@@ -98,13 +99,17 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3 :: Only',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
-        'Framework :: Django :: 2.2',
         'Framework :: Django :: 3.2',
         'Framework :: Django :: 4.0',
         'Development Status :: 5 - Production/Stable',
     ],
+    project_urls={
+        'Documentation': 'https://django-bleach.readthedocs.io/',
+        'Release notes': 'https://github.com/marksweb/django-bleach/blob/main/CHANGELOG.md',
+        'Issues': 'https://github.com/marksweb/django-bleach/issues',
+        'Source': 'https://github.com/marksweb/django-bleach',
+    }
 )

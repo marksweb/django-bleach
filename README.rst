@@ -13,6 +13,10 @@ django-bleach - Bleach and sanitise user HTML
     :target: https://pypi.python.org/pypi/django-bleach/
     :alt: License
 
+.. image:: http://img.shields.io/pypi/dm/django-bleach.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/django-bleach/
+    :alt: Downloads
+
 |
 
 .. image:: https://codecov.io/gh/marksweb/django-bleach/branch/master/graph/badge.svg
@@ -26,9 +30,13 @@ django-bleach - Bleach and sanitise user HTML
    :target: https://results.pre-commit.ci/latest/github/marksweb/django-bleach/master
    :alt: pre-commit.ci status
 
-.. image:: http://img.shields.io/pypi/dm/django-bleach.svg?style=flat-square
-    :target: https://pypi.python.org/pypi/django-bleach/
-    :alt: Downloads
+.. image:: https://img.shields.io/lgtm/grade/python/g/marksweb/django-bleach.svg?logo=lgtm&logoWidth=18
+   :target: https://lgtm.com/projects/g/marksweb/django-bleach/context:python
+   :alt: Language grade: Python
+
+.. image:: https://img.shields.io/lgtm/alerts/g/marksweb/django-bleach.svg?logo=lgtm&logoWidth=18
+   :target: https://lgtm.com/projects/g/marksweb/django-bleach/alerts/
+   :alt: Total alerts
 
 |
 

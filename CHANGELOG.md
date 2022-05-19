@@ -4,13 +4,22 @@ Change Log
 This document records all notable changes to [django-bleach](https://github.com/marksweb/django-bleach).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-[unreleased](https://github.com/marksweb/django-bleach/compare/1.0.1...master) changes
+[unreleased](https://github.com/marksweb/django-bleach/compare/2.0.0...master) changes
 -------------------------------------------------------------------------------------
 
 * Bleach dependency is now at ``>=5,<6`` [#55](https://github.com/marksweb/django-bleach/pull/55) (Thanks [Laityned](https://github.com/Laityned))
 * Deprecate bleach's `allowed_styles` kwarg
 * Added support for bleach's `css_sanitizer` kwarg
 * Add isort and codespell to ci
+* Dropped support for python 3.6 and 3.7 as well as django 3.0 and 3.1
+* Renamed default branch from `master` to `main`. If you have the project locally, you can update using:
+
+```shell
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
 
 Version 2.0.0
 =============

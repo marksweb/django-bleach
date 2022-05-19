@@ -1,0 +1,5 @@
+bump2version
+pip-tools
+pre-commit
+tox
+wheel
