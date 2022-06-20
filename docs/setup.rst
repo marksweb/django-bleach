@@ -21,4 +21,4 @@ Setup
    ``django_bleach.forms.BleachField`` to a form, or use the ``bleach``
    template filter in your templates.
 
-.. _Git repository: http://bitbucket.org/ionata/django-bleach/
+.. _Git repository: https://github.com/marksweb/django-bleach/
