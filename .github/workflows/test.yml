@@ -37,7 +37,7 @@ jobs:
         coverage run --rcfile .coveragerc testproject/manage.py test --failfast django_bleach
 
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
 
   pre-release:
     runs-on: ${{ matrix.os }}
