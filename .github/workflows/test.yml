@@ -16,6 +16,7 @@ jobs:
         django-version: [
             '3.2',
             '4.0',
+            '4.1',
         ]
         os: [
           ubuntu-20.04,
