@@ -11,10 +11,6 @@ Version 3.0.1
 =============
 **11-10-2022**
 
-Version 3.0.1
-=============
-**12-10-2022**
-
 * Added support for django 4.1
 
 Version 3.0.0
