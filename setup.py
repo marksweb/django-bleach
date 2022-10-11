@@ -69,7 +69,7 @@ setup(
     packages=find_packages(exclude=('testproject*',)),
     install_requires=[
         'bleach[css]>=5,<6',
-        'Django>=1.11',
+        'Django>=3.2',
     ],
     python_requires='>=3.8',
     tests_require=[

@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 [unreleased](https://github.com/marksweb/django-bleach/compare/3.0.0...master) changes
 -------------------------------------------------------------------------------------
 
+Version 3.0.1
+=============
+**12-10-2022**
+
+* Added support for django 4.1
+
 Version 3.0.0
 =============
 **19-05-2022**
