@@ -4,10 +4,6 @@
 #
 #    pip-compile
 #
---trusted-host pypi.python.org
---trusted-host pypi.org
---trusted-host files.pythonhosted.org
-
 bump2version==1.0.1
     # via -r requirements.in
 cfgv==3.3.1
@@ -58,7 +54,7 @@ virtualenv==20.13.0
     # via
     #   pre-commit
     #   tox
-wheel==0.37.1
+wheel==0.38.1
     # via
     #   -r requirements.in
     #   pip-tools
