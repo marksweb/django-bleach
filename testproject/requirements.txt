@@ -6,7 +6,7 @@
 #
 alabaster==0.7.12
     # via sphinx
-asgiref==3.4.1
+asgiref==3.6.0
     # via django
 attrs==21.4.0
     # via
@@ -24,7 +24,7 @@ click==8.0.3
     # via pip-tools
 coverage==6.2
     # via -r requirements.in
-django==4.0.8
+django==4.1.9
     # via -r requirements.in
 docutils==0.17.1
     # via
