@@ -52,7 +52,7 @@ jobs:
   coverage:
     name: Coverage
     runs-on: ubuntu-22.04
-    needs: tests
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v3
 
