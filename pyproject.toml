@@ -2,6 +2,10 @@
 # Minimum requirements for the build system to execute.
 requires = ["setuptools", "wheel"]  # PEP 508 specifications.
 
+[tool.black]
+line-length = 79
+target-version = ["py311"]
+
 [tool.ruff]
 # https://beta.ruff.rs/docs/configuration/
 line-length = 79
@@ -27,7 +31,9 @@ exclude = [
   ".env",
   ".venv",
   "**migrations/**",
+  "docs/**",
   "node_modules",
+  "requirements",
   "venv",
   "testproject",
 ]
