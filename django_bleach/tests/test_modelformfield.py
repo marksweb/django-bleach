@@ -11,17 +11,16 @@ from .test_models import BleachContent
 class BleachContentModelForm(forms.ModelForm):
     class Meta:
         model = BleachContent
-        fields = '__all__'
+        fields = "__all__"
 
 
 class TestModelFormField(TestCase):
-
     def setUp(self):
         model_form = BleachContentModelForm()
-        self.form_field = model_form.fields['content']
-        self.choice_form_field = model_form.fields['choice']
-        self.blank_field_form_field = model_form.fields['blank_field']
-        self.model_field = BleachContent()._meta.get_field('content')
+        self.form_field = model_form.fields["content"]
+        self.choice_form_field = model_form.fields["choice"]
+        self.blank_field_form_field = model_form.fields["blank_field"]
+        self.model_field = BleachContent()._meta.get_field("content")
 
     def test_formfield_type(self):
         """
@@ -33,25 +32,26 @@ class TestModelFormField(TestCase):
         """
         Widget class is Textarea when BLEACH_DEFAULT_WIDGET is not set.
         """
-        form = forms.modelform_factory(Person, fields='__all__')()
+        form = forms.modelform_factory(Person, fields="__all__")()
         self.assertIsInstance(
-            form.fields['biography'].widget, forms.Textarea,
+            form.fields["biography"].widget,
+            forms.Textarea,
         )
 
     @override_settings(
-        BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget'
+        BLEACH_DEFAULT_WIDGET="testproject.forms.CustomBleachWidget"
     )
     def test_custom_widget_type(self):
         """
         Widget class matches BLEACH_DEFAULT_WIDGET setting.
         """
-        form = forms.modelform_factory(Person, fields='__all__')()
+        form = forms.modelform_factory(Person, fields="__all__")()
         self.assertIsInstance(
-            form.fields['biography'].widget, CustomBleachWidget
+            form.fields["biography"].widget, CustomBleachWidget
         )
 
     @override_settings(
-        BLEACH_DEFAULT_WIDGET='testproject.forms.CustomBleachWidget'
+        BLEACH_DEFAULT_WIDGET="testproject.forms.CustomBleachWidget"
     )
     def test_widget_override(self):
         """
@@ -59,16 +59,17 @@ class TestModelFormField(TestCase):
         """
         form = forms.modelform_factory(
             Person,
-            fields='__all__',
+            fields="__all__",
             widgets={"biography": CustomBleachWidget},
         )()
         self.assertIsInstance(
-            form.fields['biography'].widget, CustomBleachWidget
+            form.fields["biography"].widget, CustomBleachWidget
         )
 
     def test_same_allowed_args(self):
         """
-        Check model and form's allowed arguments (tags, attributes, ...) are same
+        Check model and form's allowed arguments (tags, attributes, ...)
+        are the same
         """
         form_allowed_args: dict = self.form_field.bleach_options
         model_allowed_args: dict = self.model_field.bleach_kwargs
@@ -102,17 +103,16 @@ class CustomBleachedFormField(bleach_forms.BleachField):
 class OverriddenBleachContentModelForm(forms.ModelForm):
     class Meta:
         model = BleachContent
-        fields = '__all__'
+        fields = "__all__"
         field_classes = {
             "content": CustomBleachedFormField,
         }
 
 
 class TestModelFormFieldOverrides(TestCase):
-
     def setUp(self):
         model_form = OverriddenBleachContentModelForm()
-        self.form_field = model_form.fields['content']
+        self.form_field = model_form.fields["content"]
 
     def test_formfield_type(self):
         """

@@ -1,6 +1,5 @@
-from django.conf import settings
-
 from bleach.css_sanitizer import CSSSanitizer
+from django.conf import settings
 
 
 def get_bleach_default_options():
@@ -11,7 +10,7 @@ def get_bleach_default_options():
         "BLEACH_ALLOWED_STYLES": "css_sanitizer",
         "BLEACH_STRIP_TAGS": "strip",
         "BLEACH_STRIP_COMMENTS": "strip_comments",
-        "BLEACH_ALLOWED_PROTOCOLS": "protocols"
+        "BLEACH_ALLOWED_PROTOCOLS": "protocols",
     }
 
     for setting, kwarg in bleach_settings.items():
