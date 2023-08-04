@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 import sys
 import os
+
 try:
     from django.core.management import execute_manager
+
     OLD_DJANGO = True
 except ImportError:
     from django.core.management import execute_from_command_line
+
     OLD_DJANGO = False
 
 if OLD_DJANGO:
@@ -20,7 +23,7 @@ if OLD_DJANGO:
         )
         sys.exit(1)
 
-BASEDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+BASEDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, BASEDIR)
 
 if __name__ == "__main__":
