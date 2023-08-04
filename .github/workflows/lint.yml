@@ -1,6 +1,6 @@
 name: Lint
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,32 +16,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11
+          python-version: "3.11"
           cache: 'pip'
-      - name: Install ruff
-        run: pip install --upgrade ruff
-      - name: Run ruff
-        uses: liskin/gh-problem-matcher-wrap@v2
-        with:
-          linters: ruff
-          run: ruff
-
-  isort:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-          cache: 'pip'
-      - run: python -m pip install isort
-      - name: isort
-        uses: liskin/gh-problem-matcher-wrap@v2
-        with:
-          linters: isort
-          run: isort --check --diff django_bleach
+      - run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+      - name: Run Ruff
+        run: ruff django_bleach
 
   codespell:
     runs-on: ubuntu-latest
@@ -51,7 +32,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.11
           cache: 'pip'
       - run: python -m pip install codespell
       - name: codespell
