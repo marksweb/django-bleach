@@ -20,10 +20,11 @@ repos:
       - id: django-upgrade
         args: [--target-version, "3.2"]
 
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.1.0
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.278"
     hooks:
-      - id: flake8
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
 
   - repo: https://github.com/asottile/yesqa
     rev: v1.5.0
@@ -36,7 +37,8 @@ repos:
       - id: check-merge-conflict
       - id: mixed-line-ending
 
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
+  - repo: https://github.com/ambv/black
+    rev: 23.7.0
     hooks:
-      - id: isort
+      - id: black
+        name: Black
