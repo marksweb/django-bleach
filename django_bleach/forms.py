@@ -1,4 +1,3 @@
-import warnings
 from importlib import import_module
 
 import bleach
@@ -66,22 +65,8 @@ class BleachField(forms.CharField):
             self.bleach_options["tags"] = allowed_tags
         if allowed_attributes is not None:
             self.bleach_options["attributes"] = allowed_attributes
-        if allowed_styles is not None:
-            warnings.warn(
-                "allowed_styles will be deprecated, use css_sanitizer instead",
-                DeprecationWarning,
-                stacklevel=2,
-            )
-
-            if css_sanitizer:
-                warnings.warn(
-                    "allowed_styles argument is ignored since "
-                    "css_sanitizer is favoured over allowed_styles",
-                    stacklevel=2,
-                )
-            self.bleach_options["css_sanitizer"] = CSSSanitizer(
-                allowed_css_properties=allowed_styles
-            )
+        if allowed_styles:
+            css_sanitizer = CSSSanitizer(allowed_css_properties=allowed_styles)
         if css_sanitizer is not None:
             self.bleach_options["css_sanitizer"] = css_sanitizer
         if allowed_protocols is not None:

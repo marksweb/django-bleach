@@ -1,5 +1,3 @@
-import warnings
-
 from bleach import clean
 from bleach.css_sanitizer import CSSSanitizer
 from django.db import models
@@ -31,20 +29,7 @@ class BleachField(models.TextField):
         if allowed_attributes:
             self.bleach_kwargs["attributes"] = allowed_attributes
         if allowed_styles:
-            warnings.warn(
-                "allowed_styles will be deprecated, use css_sanitizer instead",
-                DeprecationWarning,
-                stacklevel=2,
-            )
-            if css_sanitizer:
-                warnings.warn(
-                    "allowed_styles argument is ignored since css_sanitizer "
-                    "is favoured over allowed_styles",
-                    stacklevel=2,
-                )
-            self.bleach_kwargs["css_sanitizer"] = CSSSanitizer(
-                allowed_css_properties=allowed_styles
-            )
+            css_sanitizer = CSSSanitizer(allowed_css_properties=allowed_styles)
         if css_sanitizer:
             self.bleach_kwargs["css_sanitizer"] = css_sanitizer
         if allowed_protocols:
