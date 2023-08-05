@@ -82,16 +82,13 @@ jobs:
 
   unit-tests-future-versions:
     # Runs for all Django/Python versions which are not yet supported
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.11', '3.12']
         django-version: [
           'https://github.com/django/django/archive/main.tar.gz'
-        ]
-        os: [
-          ubuntu-20.04,
         ]
 
     steps:
