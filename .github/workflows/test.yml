@@ -1,25 +1,95 @@
 name: Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - main
+  pull_request:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
   unit-tests:
-    runs-on: ${{ matrix.os }}
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-22.04
+
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.8, 3.9, 3.10.1]
+        python-version:
+        - 3.8
+        - 3.9
+        - '3.10'
+        - '3.11'
+        - '3.12'
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        allow-prereleases: true
+        cache: pip
+        cache-dependency-path: 'requirements/*.txt'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        python -m pip install --upgrade 'tox>=4.0.0rc3'
+
+    - name: Run tox targets for ${{ matrix.python-version }}
+      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .)
+
+    - name: Upload coverage data
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-data
+        path: '.coverage.*'
+
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-22.04
+    needs: unit-tests
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade coverage[toml]
+
+      - name: Download data
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage-data
+
+      - name: Fail if coverage is <100%
+        run: |
+          python -m coverage combine
+          python -m coverage html --skip-covered --skip-empty
+          python -m coverage report --fail-under=100
+
+      - name: Upload HTML report
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-report
+          path: htmlcov
+
+  unit-tests-future-versions:
+    # Runs for all Django/Python versions which are not yet supported
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12']
         django-version: [
-            '3.2',
-            '4.0',
-            '4.1',
-        ]
-        os: [
-          ubuntu-20.04,
+          'https://github.com/django/django/archive/main.tar.gz'
         ]
 
     steps:
@@ -27,39 +97,14 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
+        allow-prereleases: true
+        cache: pip
+        cache-dependency-path: 'requirements/*.txt'
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install django==${{ matrix.django-version }} "bleach>=5,<6" coverage mock
-        python setup.py install
-    - name: Run coverage
-      run: |
-        coverage run --rcfile .coveragerc testproject/manage.py test --failfast django_bleach
+        python -m pip install --upgrade pip setuptools wheel
+        python -m pip install --upgrade 'tox>=4.0.0rc3'
 
-    - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v3
-
-  pre-release:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [
-          ubuntu-20.04,
-        ]
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install --pre django "bleach>=5,<6" coverage mock
-        python setup.py install
-    - name: Run tests
-      run: |
-        python testproject/manage.py test django_bleach
+    - name: Run tox targets for ${{ matrix.python-version }}
+      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .)

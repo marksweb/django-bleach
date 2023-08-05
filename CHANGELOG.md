@@ -4,8 +4,17 @@ Change Log
 This document records all notable changes to [django-bleach](https://github.com/marksweb/django-bleach).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-[unreleased](https://github.com/marksweb/django-bleach/compare/3.0.1...master) changes
+[unreleased](https://github.com/marksweb/django-bleach/compare/3.1.0...master) changes
 -------------------------------------------------------------------------------------
+
+Version 3.1.0
+=============
+**05-08-2023**
+
+* Added support for django 4.2
+* Added support for python 3.12
+* Revamp package for easier maintenance
+
 
 Version 3.0.1
 =============

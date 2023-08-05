@@ -1,3 +1,82 @@
 [build-system]
 # Minimum requirements for the build system to execute.
 requires = ["setuptools", "wheel"]  # PEP 508 specifications.
+
+[tool.black]
+line-length = 79
+target-version = ["py311"]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+  "testproject/**"
+]
+
+[tool.coverage.paths]
+source = [
+  "django_bleach",
+  ".tox/**/site-packages"
+]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
+line-length = 79
+select = [
+  "E",  # pycodestyle errors
+  "W",  # pycodestyle warnings
+  "F",  # pyflakes
+  "I",  # isort
+  "C",  # flake8-comprehensions
+  "B",  # flake8-bugbear
+  "Q", # flake8-quotes
+  "PLE", # pylint error
+  "PLR", # pylint refactor
+  "PLW", # pylint warning
+  "UP", # pyupgrade
+]
+
+exclude = [
+  ".eggs",
+  ".git",
+  ".mypy_cache",
+  ".ruff_cache",
+  ".env",
+  ".venv",
+  "**migrations/**",
+  "docs/**",
+  "node_modules",
+  "requirements",
+  "venv",
+  "testproject",
+]
+
+ignore = [
+  "B006",  # Do not use mutable data structures for argument defaults
+  "B011",  # tests use assert False
+  "B019",  # Use of `functools.lru_cache` or `functools.cache` on methods can lead to memory leaks
+  "B905",  # `zip()` without an explicit `strict=` parameter
+  "C901",  # too complex functions
+  "E402",  # module level import not at top of file
+  "E731",  # do not assign a lambda expression, use a def
+  "PLR0911",  # Too many return statements
+  "PLR0912",  # Too many branches
+  "PLR0913",  # Too many arguments to function call
+  "PLR0915",  # Too many statements
+  "PLR2004",  # Magic value used in comparison, consider replacing with a constant variable
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = [
+  "F401"  # unused-import
+]
+
+[tool.ruff.isort]
+combine-as-imports = true
+known-first-party = [
+  "django_bleach",
+]
+extra-standard-library = ["dataclasses"]

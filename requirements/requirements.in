@@ -1,0 +1,4 @@
+bleach>=5,<6
+coverage[toml]
+mock
+tinycss2

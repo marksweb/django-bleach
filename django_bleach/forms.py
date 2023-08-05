@@ -1,38 +1,37 @@
+from importlib import import_module
+
+import bleach
+from bleach.css_sanitizer import CSSSanitizer
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.safestring import mark_safe
 
-import bleach
-import warnings
-from bleach.css_sanitizer import CSSSanitizer
-from importlib import import_module
-
 from django_bleach.utils import get_bleach_default_options
 
 
 def load_widget(path):
-    """ Load custom widget for the form field """
+    """Load custom widget for the form field"""
     i = path.rfind(".")
-    module, attr = path[:i], path[i + 1:]
+    module, attr = path[:i], path[i + 1 :]
     try:
         mod = import_module(module)
     except (ImportError, ValueError) as e:
         error_message = "Error importing widget for BleachField %s: '%s'"
-        raise ImproperlyConfigured(error_message % (path, e))
+        raise ImproperlyConfigured(error_message % (path, e)) from e
 
     try:
         cls = getattr(mod, attr)
-    except AttributeError:
+    except AttributeError as e:
         raise ImproperlyConfigured(
             f"Module '{module}' does not define a '{attr}' widget"
-        )
+        ) from e
 
     return cls
 
 
 def get_default_widget():
-    """ Get the default widget or the widget defined in settings """
+    """Get the default widget or the widget defined in settings"""
     default_widget = forms.Textarea
     if hasattr(settings, "BLEACH_DEFAULT_WIDGET"):
         default_widget = load_widget(settings.BLEACH_DEFAULT_WIDGET)
@@ -40,13 +39,22 @@ def get_default_widget():
 
 
 class BleachField(forms.CharField):
-    """ Bleach form field """
+    """Bleach form field"""
+
     empty_values = [None, "", [], (), {}]
 
-    def __init__(self, allowed_tags=None, allowed_attributes=None,
-                 allowed_styles=None, allowed_protocols=None,
-                 strip_comments=None, strip_tags=None, css_sanitizer=None, *args, **kwargs):
-
+    def __init__(
+        self,
+        allowed_tags=None,
+        allowed_attributes=None,
+        allowed_styles=None,
+        allowed_protocols=None,
+        strip_comments=None,
+        strip_tags=None,
+        css_sanitizer=None,
+        *args,
+        **kwargs,
+    ):
         self.widget = get_default_widget()
 
         super().__init__(*args, **kwargs)
@@ -57,15 +65,8 @@ class BleachField(forms.CharField):
             self.bleach_options["tags"] = allowed_tags
         if allowed_attributes is not None:
             self.bleach_options["attributes"] = allowed_attributes
-        if allowed_styles is not None:
-            warnings.warn(
-                "allowed_styles will be deprecated, use css_sanitizer instead",
-                DeprecationWarning
-            )
-
-            if css_sanitizer:
-                warnings.warn("allowed_styles argument is ignored since css_sanitizer is favoured over allowed_styles")
-            self.bleach_options["css_sanitizer"] = CSSSanitizer(allowed_css_properties=allowed_styles)
+        if allowed_styles:
+            css_sanitizer = CSSSanitizer(allowed_css_properties=allowed_styles)
         if css_sanitizer is not None:
             self.bleach_options["css_sanitizer"] = css_sanitizer
         if allowed_protocols is not None:

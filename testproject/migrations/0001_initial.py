@@ -5,19 +5,30 @@ import django_bleach.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Person',
+            name="Person",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=20)),
-                ('biography', django_bleach.models.BleachField(max_length=100, verbose_name='Person biography')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=20)),
+                (
+                    "biography",
+                    django_bleach.models.BleachField(
+                        max_length=100, verbose_name="Person biography"
+                    ),
+                ),
             ],
         ),
     ]

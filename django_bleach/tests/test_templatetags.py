@@ -3,45 +3,38 @@ from django.test import TestCase
 
 
 class TestBleachTemplates(TestCase):
-    """ Test template tags """
+    """Test template tags"""
 
     def test_bleaching(self):
-        """ Test that unsafe tags are sanitised """
+        """Test that unsafe tags are sanitised"""
         context = Context(
-            {'some_unsafe_content': '<script>alert("Hello World!")</script>'},
+            {"some_unsafe_content": '<script>alert("Hello World!")</script>'},
         )
         template_to_render = Template(
-            '{% load bleach_tags %}'
-            '{{ some_unsafe_content|bleach }}'
+            "{% load bleach_tags %}" "{{ some_unsafe_content|bleach }}"
         )
         rendered_template = template_to_render.render(context)
         self.assertInHTML(
             '&lt;script&gt;alert("Hello World!")&lt;/script&gt;',
-            rendered_template
+            rendered_template,
         )
 
     def test_bleaching_none(self):
-        """ Test that None is handled properly as an input """
-        context = Context(
-            {'none_value': None}
-        )
+        """Test that None is handled properly as an input"""
+        context = Context({"none_value": None})
         template_to_render = Template(
-            '{% load bleach_tags %}'
-            '{{ none_value|bleach }}'
+            "{% load bleach_tags %}" "{{ none_value|bleach }}"
         )
         rendered_template = template_to_render.render(context)
-        self.assertEqual(
-            'None',
-            rendered_template
-        )
+        self.assertEqual("None", rendered_template)
 
     def test_bleaching_tags(self):
-        """ Test provided tags are kept """
+        """Test provided tags are kept"""
         context = Context(
-            {'some_unsafe_content': '<script>alert("Hello World!")</script>'}
+            {"some_unsafe_content": '<script>alert("Hello World!")</script>'}
         )
         template_to_render = Template(
-            '{% load bleach_tags %}'
+            "{% load bleach_tags %}"
             '{{ some_unsafe_content|bleach:"script" }}'
         )
         rendered_template = template_to_render.render(context)
@@ -50,28 +43,26 @@ class TestBleachTemplates(TestCase):
         )
 
     def test_linkify(self):
-        """ Test bleach linkify """
-        url = 'www.google.com'
-        context = Context({'link_this': url})
+        """Test bleach linkify"""
+        url = "www.google.com"
+        context = Context({"link_this": url})
         template_to_render = Template(
-            '{% load bleach_tags %}'
-            '{{ link_this|bleach_linkify|safe }}'
+            "{% load bleach_tags %}" "{{ link_this|bleach_linkify|safe }}"
         )
         rendered_template = template_to_render.render(context)
         self.assertInHTML(
             '<a href="http://{0}" rel="nofollow">{0}</a>'.format(url),
-            rendered_template
+            rendered_template,
         )
 
     def test_linkify_none(self):
-        """ Test bleach linkify with None as an input """
-        context = Context({'none_value': None})
+        """Test bleach linkify with None as an input"""
+        context = Context({"none_value": None})
         template_to_render = Template(
-            '{% load bleach_tags %}'
-            '{{ none_value|bleach_linkify }}'
+            "{% load bleach_tags %}" "{{ none_value|bleach_linkify }}"
         )
         rendered_template = template_to_render.render(context)
         self.assertEqual(
-            'None',
+            "None",
             rendered_template,
         )
