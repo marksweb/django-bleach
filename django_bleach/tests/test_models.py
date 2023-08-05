@@ -23,6 +23,7 @@ class BleachContent(models.Model):
             allowed_css_properties=ALLOWED_CSS_PROPERTIES
         ),
         allowed_tags=ALLOWED_TAGS,
+        allowed_styles=ALLOWED_CSS_PROPERTIES,
         strip_comments=True,
         strip_tags=True,
     )

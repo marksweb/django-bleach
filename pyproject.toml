@@ -9,11 +9,14 @@ target-version = ["py311"]
 [tool.coverage.run]
 branch = true
 parallel = true
+omit = [
+  "testproject/**"
+]
 
 [tool.coverage.paths]
 source = [
-    "django_bleach",
-    ".tox/**/site-packages"
+  "django_bleach",
+  ".tox/**/site-packages"
 ]
 
 [tool.coverage.report]
