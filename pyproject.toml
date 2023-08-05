@@ -6,6 +6,19 @@ requires = ["setuptools", "wheel"]  # PEP 508 specifications.
 line-length = 79
 target-version = ["py311"]
 
+[tool.coverage.run]
+branch = true
+parallel = true
+
+[tool.coverage.paths]
+source = [
+    "django_bleach",
+    ".tox/**/site-packages"
+]
+
+[tool.coverage.report]
+show_missing = true
+
 [tool.ruff]
 # https://beta.ruff.rs/docs/configuration/
 line-length = 79
