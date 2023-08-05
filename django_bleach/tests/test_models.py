@@ -8,7 +8,6 @@ from testproject.constants import (
     ALLOWED_ATTRIBUTES,
     ALLOWED_CSS_PROPERTIES,
     ALLOWED_PROTOCOLS,
-    ALLOWED_STYLES,
     ALLOWED_TAGS,
 )
 
@@ -58,30 +57,6 @@ class TestBleachModelField(TestCase):
         for key, value in test_data.items():
             obj = BleachContent.objects.create(content=value)
             self.assertEqual(obj.content, expected_values[key])
-
-    def test_deprecation_allowed_styles(self):
-        with self.assertWarns(DeprecationWarning):
-            BleachField(allowed_styles=ALLOWED_STYLES)
-
-    def test_prefer_css_sanitizer_over_allowed_styles(self):
-        with self.assertWarnsMessage(
-            UserWarning,
-            "allowed_styles argument is ignored since css_sanitizer "
-            "is favoured over allowed_styles",
-        ):
-            field = BleachField(
-                allowed_styles=["color", "text-align"],
-                css_sanitizer=CSSSanitizer(
-                    allowed_css_properties=ALLOWED_CSS_PROPERTIES
-                ),
-            )
-            self.assertIsInstance(
-                field.bleach_kwargs["css_sanitizer"], CSSSanitizer
-            )
-            self.assertEqual(
-                field.bleach_kwargs["css_sanitizer"].allowed_css_properties,
-                ALLOWED_CSS_PROPERTIES,
-            )
 
     def test_retrieved_values_are_template_safe(self):
         obj = BleachContent.objects.create(content="some content")
