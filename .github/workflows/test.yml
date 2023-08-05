@@ -68,9 +68,8 @@ jobs:
         with:
           name: coverage-data
 
-      - name: Combine coverage and fail if it's <100%
+      - name: Fail if coverage is <100%
         run: |
-          python -m coverage combine
           python -m coverage html --skip-covered --skip-empty
           python -m coverage report --fail-under=100
 
