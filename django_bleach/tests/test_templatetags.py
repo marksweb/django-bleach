@@ -51,7 +51,7 @@ class TestBleachTemplates(TestCase):
         )
         rendered_template = template_to_render.render(context)
         self.assertInHTML(
-            '<a href="http://{0}" rel="nofollow">{0}</a>'.format(url),
+            f'<a href="http://{url}" rel="nofollow">{url}</a>',
             rendered_template,
         )
 
