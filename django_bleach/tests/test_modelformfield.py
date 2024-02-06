@@ -96,8 +96,7 @@ class TestModelFormField(TestCase):
         self.assertEqual(self.form_field.required, True)
 
 
-class CustomBleachedFormField(bleach_forms.BleachField):
-    ...
+class CustomBleachedFormField(bleach_forms.BleachField): ...
 
 
 class OverriddenBleachContentModelForm(forms.ModelForm):
