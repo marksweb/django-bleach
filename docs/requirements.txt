@@ -81,7 +81,7 @@ sphinxcontrib-spelling==8.0.0
     # via -r requirements.in
 sphinxext-opengraph==0.9.0
     # via -r requirements.in
-tornado==6.4
+tornado==6.4.1
     # via livereload
 urllib3==2.2.2
     # via requests
