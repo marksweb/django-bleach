@@ -9,19 +9,19 @@ ci:
 
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.2
+    rev: v3.19.0
     hooks:
       - id: pyupgrade
         args: ["--py38-plus"]
 
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: '1.16.0'
+    rev: '1.22.1'
     hooks:
       - id: django-upgrade
         args: [--target-version, "3.2"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.4.3"
+    rev: "v0.7.2"
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -32,13 +32,13 @@ repos:
       - id: yesqa
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-merge-conflict
       - id: mixed-line-ending
 
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 24.10.0
     hooks:
       - id: black
         name: Black
