@@ -40,6 +40,15 @@ django-bleach - Bleach and sanitise user HTML
 
 |
 
+Archived
+========
+
+This project has been archived because bleach is no longer supported. The supported means of sanitizing input data is the nh3 library and there's a similar package to this available:
+
+https://github.com/marksweb/django-nh3
+
+------------
+
 Bleach_ is a Python module that takes any HTML input, and returns
 valid, sanitised HTML that contains only an allowed subset of HTML tags,
 attributes and styles. ``django-bleach`` is a Django app that makes using
